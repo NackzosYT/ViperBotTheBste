@@ -32,12 +32,34 @@ client.user.setGame(`&help | ViperBot`,'https://www.twitch.tv/nackzos');
 
 
 
+/////برودكسات...//////
+client.on("message", message => {
+ 
+            if (message.content.startsWith(prefix + "obc")) {
+                         if (!message.member.hasPermission("ADMINISTRATOR"))  return;
+  let args = message.content.split(" ").slice(1);
+  var argresult = args.join(' ');
+  message.guild.members.filter(m => m.presence.status !== 'offline').forEach(m => {//حقوق دايموند كودز
+ m.send(`${argresult}\n ${m}`);
+})
+ message.channel.send(`\`${message.guild.members.filter(m => m.presence.status !== 'online').size}\` : عدد الاعضاء المستلمين`);
+ message.delete();
+};    
+});
 
 
 
-
-
-
+client.on('message', async message => {  //itzZa1D & Toxic Codes
+  let args = message.content.slice(3);   //itzZa1D & Toxic Codes
+  if(message.content.startsWith(prefix + 'bc')) {  //itzZa1D & Toxic Codes
+    if(!message.guild.members.get(message.author.id).hasPermission('ADMINISTRATOR')) return message.channel.send('Required Administrator Permission')
+       message.guild.members.forEach(m => {  //itzZa1D & Toxic Codes
+      
+      m.send(args.replace('[user]', m).replace('[server]', m.guild.name).replace('[sender]', message.author.username))  //itzZa1D & Toxic Codes
+    })
+  }
+}) //itzZa1D & Toxic Codes
+///////////////////////////////////////
 
 
 client.on("message", message => {
@@ -60,10 +82,14 @@ client.on("message", message => {
 &avatar | لعرض صورتك او صوره شخص ما
 &ping | لمشاهده سرعه البوت
 &user | معلومات شخص ما
+&say | لتكرار كل شي تكتبه
 
 
 - AdminOrder
+&bc | برودكسات للجميع
+&obc | برودكسات للاونلاين فقط
 &setlog | قريبا
+&clear | لمسح الشات
 &autorole | لتمكين رتبه تلقائيه
 &ban | لتبنيد شخص من سيرفر
 &kick | لطرد شخص من سيرفر
@@ -3324,5 +3350,79 @@ if(message.content.startsWith(prefix+"user")) {
   .catch(e => logger.error(e));
 }
  });
+ 
+ // clear
+
+client.on('message', message => {//Toxic Codes
+	var prefix = "-"; // ????? ????? ._.
+   if(!message.channel.guild) return;//Toxic Codes
+if(message.content.startsWith(prefix + 'clear')) {//Toxic Codes
+if(!message.channel.guild) return message.channel.send('**This Command is Just For Servers**').then(m => m.delete(5000));//Toxic Codes
+if(!message.member.hasPermission('MANAGE_MESSAGES')) return      message.channel.send('**You Do not have permission** `MANAGE_MESSAGES`' );//Toxic Codes
+let args = message.content.split(" ").join(" ").slice(2 + prefix.length);//Toxic Codes
+let request = `Requested By ${message.author.username}`;//Toxic Codes
+message.channel.send(`**Are You sure you want to clear the chat?**`).then(msg => {//Toxic Codes
+msg.react('?')//Toxic Codes
+.then(() => msg.react('?'))//Toxic Codes
+.then(() =>msg.react('?'))//Toxic Codes
+//Toxic Codes
+let reaction1Filter = (reaction, user) => reaction.emoji.name === '?' && user.id === message.author.id;//Toxic Codes
+let reaction2Filter = (reaction, user) => reaction.emoji.name === '?' && user.id === message.author.id;//Toxic Codes
+//Toxic Codes
+let reaction1 = msg.createReactionCollector(reaction1Filter, { time: 12000 });//Toxic Codes
+let reaction2 = msg.createReactionCollector(reaction2Filter, { time: 12000 });//Toxic Codes
+reaction1.on("collect", r => {//Toxic Codes
+message.channel.send(`Chat will delete`).then(m => m.delete(5000));//Toxic Codes
+var msg;//Toxic Codes
+        msg = parseInt();//Toxic Codes
+//Toxic Codes
+      message.channel.fetchMessages({limit: msg}).then(messages => message.channel.bulkDelete(messages)).catch(console.error);//Toxic Codes
+      message.channel.sendMessage("", {embed: {//Toxic Codes
+        title: "`` Chat Deleted ``",//Toxic Codes
+        color: 0x06DF00,//Toxic Codes
+        footer: {//Toxic Codes
+//Toxic Codes
+        }//Toxic Codes//Toxic Codes
+      }}).then(msg => {msg.delete(3000)});//Toxic Codes
+//Toxic Codes
+})//Toxic Codes
+reaction2.on("collect", r => {//Toxic Codes
+message.channel.send(`**Chat deletion cancelled**`).then(m => m.delete(5000));//Toxic Codes
+msg.delete();//Toxic Codes
+})//Toxic Codes
+})//Toxic Codes
+}//Toxic Codes
+});//Toxic Codes
+//Toxic Codes
+client.on("message", message => {//Toxic Codes
+    var prefix = "-";//Toxic Codes
+            var args = message.content.substring(prefix.length).split(" ");//Toxic Codes
+            if (message.content.startsWith(prefix + "clear")) {//Toxic Codes
+ if (!args[1]) {//Toxic Codes
+                                let x5bz1 = new Discord.RichEmbed()//Toxic Codes
+                                .setDescription("-clear <number>")//Toxic Codes
+                                .setColor("RANDOM")//Toxic Codes
+                                message.channel.sendEmbed(x5bz1);//Toxic Codes
+                            } else {//Toxic Codes
+                            let messagecount = parseInt(args[1]);//Toxic Codes
+                            message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));//Toxic Codes
+                                                          message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));//Toxic Codes
+                            message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));//Toxic Codes
+                            let x5bz2 = new Discord.RichEmbed()
+                                                            .setColor("RANDOM")//Toxic Codes
+                                .setDescription(":white_check_mark: | Delete " + args[1] + " Message!")//Toxic Codes
+                                                                                        message.delete("..");//Toxic Codes
+                                message.channel.sendEmbed(x5bz2);//Toxic Codes
+                            }//Toxic Codes
+                          }//Toxic Codes
+});//Toxic Codes
+
+//Toxic Codes
+
+
+
+
+
+
 
 client.login(process.env.BOT_TOKEN); 
