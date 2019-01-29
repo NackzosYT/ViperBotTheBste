@@ -560,10 +560,10 @@ client.on('message', message => {//Toxic Codes
 if(message.content.startsWith(prefix + 'mute')){//Toxic Codes
     let role = message.guild.roles.find(r => r.name === 'Muted');//Toxic Codes
     if(!role) message.guild.createRole({name: 'Muted'});//Toxic Codes
-     if(user.bot){//Toxic Codes
+     if(user.bot){
         return message.channel.send(`I can't mute ${user} because he is a bot`);//Toxic Codes
     }
-    if(user.hasPermission('ADMINISTRATOR')) {//Toxic Codes
+    if(user.hasPermission('ADMINISTRATOR')) {
         return message.channel.send(`I can't mute ${user} because he is staff`);//Toxic Codes
     }//Toxic Codes
    
