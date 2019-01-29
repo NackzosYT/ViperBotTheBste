@@ -106,6 +106,9 @@ client.on("message", message => {
 &dr | لحذف جميع رتب السيرفر
 &dc | لحذف جميع رتب السيرفر
 &setwelcomer | لتمكين الترحيب بالصوره
+&ccolors | صناعه الوان بالعدد الي تريده
+&colors | قائمه الوان
+&color | يعطيك لون
 
 
 - GamesOrder
@@ -556,30 +559,44 @@ client.on('message', message => {       ///Toxic Codes
 
 
 //////كود اعطاء ميوت وفكه/////
-client.on('message', message => {//Toxic Codes
-if(message.content.startsWith(prefix + 'mute')){//Toxic Codes
-    let role = message.guild.roles.find(r => r.name === 'Muted');//Toxic Codes
-    if(!role) message.guild.createRole({name: 'Muted'});//Toxic Codes
-     if(user.bot){
-        return message.channel.send(`I can't mute ${user} because he is a bot`);//Toxic Codes
-    }
-    if(user.hasPermission('ADMINISTRATOR')) {
-        return message.channel.send(`I can't mute ${user} because he is staff`);//Toxic Codes
-    }//Toxic Codes
-   
-    if(!user){//Toxic Codes
-        message.channel.send(`There's no person to mute tho`);
-    }
-    message.guild.channels.forEach(f => {//Toxic Codes
-        f.overwritePermissions(role, {//Toxic Codes
-            SEND_MESSAGES: false
-        });
-        user.addRole(role);//Toxic Codes
-       
+const mmss = require('ms');
+client.on('message', async message => {
+    let muteReason = message.content.split(" ").slice(3).join(" ");
+    let mutePerson = message.mentions.users.first();
+    let messageArray = message.content.split(" ");
+    let muteRole = message.guild.roles.find("name", "Muted");
+    let time = messageArray[2];
+    if(message.content.startsWith(prefix + "mute")) {
+        if(!message.member.hasPermission('MUTE_MEMBERS')) return message.channel.send('**للأسف لا تمتلك صلاحية** `MUTE_MEMBERS`' );
+        if(!mutePerson) return message.channel.send("**- منشن الشخص يلي تبي تعطيه الميوت**");
+        if(mutePerson === message.author) return message.channel.send('**- ماتقدر تعطي نفسك ميوت**');
+        if(mutePerson === client.user) return message.channel.send('**- ماتقدر تعطي البوت ميوت :)**');
+        if(message.guild.member(mutePerson).roles.has(muteRole.id)) return message.channel.send('**- هذا الشخص ميوتد بالفعل**');
+        if(!muteRole) return message.guild.createRole({ name: "Muted", permissions: [] });
+        if(!time) return message.channel.send("**- اكتب الوقت**");
+        if(!time.match(/[1-60][s,m,h,d,w]/g)) return message.channel.send('**- Error in this duration maybe the bot not support this duration**');
+        if(!muteReason) return message.channel.send("**- اكتب السبب**");
+        message.guild.member(mutePerson).addRole(muteRole);
+        message.channel.send(`**:white_check_mark: ${mutePerson} has been muted ! :zipper_mouth: **`)
+        message.delete()
+        let muteEmbed = new Discord.RichEmbed()
+        .setTitle(`New Muted User`)
+        .setThumbnail(message.guild.iconURL)
+        .addField('- Muted By:',message.author,true)
+        .addField('- Muted User:', `${mutePerson}`)
+        .addField('- Reason:',muteReason,true)
+        .addField('- Duration:',`${mmss(mmss(time), {long: true})}`)
+        .setFooter(message.author.username,message.author.avatarURL);
+        let incidentchannel = message.guild.channels.find(`name`, "incidents");
+        if(!incidentchannel) return message.channel.send("Can't find incidents channel.");
+        incidentchannel.sendEmbed(muteEmbed)
+        mutePerson.send(`**You Are has been muted in ${message.guild.name} reason: ${muteReason}**`)
+        .then(() => { setTimeout(() => {
+           message.guild.member(mutePerson).removeRole(muteRole);
+       }, mmss(time));
     });
-     message.channel.send(`I muted ${user}`);
-}
-});//Toxic Codes
+    }
+});
 
 
 client.on('message', message => {//Toxic Codes
@@ -702,51 +719,6 @@ if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('لي�
 
 
 
-///////كود مسح الشات/////////
-client.on('message', message => {
-   if(!message.channel.guild) return;
-if(message.content.startsWith(prefix + 'clear')) {
-if(!message.channel.guild) return message.channel.send('**This Command is Just For Servers**').then(m => m.delete(5000));
-if(!message.member.hasPermission('MANAGE_MESSAGES')) return      message.channel.send('**You Do not have permission** `MANAGE_MESSAGES`' );
-let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
-let request = `Requested By ${message.author.username}`;
-message.channel.send(`**Are You sure you want to clear the chat?**`).then(msg => {
-msg.react('✅')
-.then(() => msg.react('❌'))
-.then(() =>msg.react('✅'))
-
-let reaction1Filter = (reaction, user) => reaction.emoji.name === '✅' && user.id === message.author.id;
-let reaction2Filter = (reaction, user) => reaction.emoji.name === '❌' && user.id === message.author.id;
-
-let reaction1 = msg.createReactionCollector(reaction1Filter, { time: 12000 });
-let reaction2 = msg.createReactionCollector(reaction2Filter, { time: 12000 });
-reaction1.on("collect", r => {
-message.channel.send(`Chat will delete`).then(m => m.delete(5000));
-var msg;
-        msg = parseInt();
-
-      message.channel.fetchMessages({limit: msg}).then(messages => message.channel.bulkDelete(messages)).catch(console.error);
-      message.channel.sendMessage("", {embed: {
-        title: "`` Chat Deleted ``",
-        color: 0x06DF00,
-        footer: {
-
-        }
-      }}).then(msg => {msg.delete(3000)});
-
-})
-reaction2.on("collect", r => {
-message.channel.send(`**Chat deletion cancelled**`).then(m => m.delete(5000));
-msg.delete();
-})
-})
-}
-});
-///////كود مسح الشات/////////
-
-
-
-
 
 
 
@@ -787,41 +759,43 @@ message.guild.member(user).kick();
 
 
 ////////الباند////////
-client.on('message', message => {
-  if (message.author.x5bz) return;
-  if (!message.content.startsWith(prefix)) return;
- 
-  let command = message.content.split(" ")[0];
-  command = command.slice(prefix.length);
- 
-  let args = message.content.split(" ").slice(1);
- 
-  if (command == "ban") {
-               if(!message.channel.guild) return message.reply('** This command only for servers**');
-         
-  if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.reply("**You Don't Have ` BAN_MEMBERS ` Permission**");
-  if(!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) return message.reply("**I Don't Have ` BAN_MEMBERS ` Permission**");
-  let user = message.mentions.users.first();
-  let reason = message.content.split(" ").slice(2).join(" ");
-  if (message.mentions.users.size < 1) return message.channel.send(`https://cdn.pg.sa/fjxlms81nk.png`);
-  if(!reason) return message.channel.send(`https://cdn.pg.sa/fjxlms81nk.png`);
-  if (!message.guild.member(user)
-  .bannable) return message.reply(`This User Is Have High Role !`);
- 
-  message.guild.member(user).ban(7, user);
- 
-  const banembed = new Discord.RichEmbed()
-  .setAuthor(`BANNED!`, user.displayAvatarURL)
-  .setColor("RANDOM")
-  .setTimestamp()
-  .addField("**User:**",  '**[ ' + `${user.tag}` + ' ]**')
-  .addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
-  .addField("**Reason:**", '**[ ' + `${reason}` + ' ]**')
-  message.channel.send({
-    embed : banembed
-  })
-}
-});
+client.on('message', async message => {
+    var moment = require('moment');
+    var mmss = require('ms')
+    let date = moment().format('Do MMMM YYYY , hh:mm');
+    let User = message.mentions.users.first();
+    let Reason = message.content.split(" ").slice(3).join(" ");
+    let messageArray = message.content.split(" ");
+    let time = messageArray[2];
+    if(message.content.startsWith(prefix + "ban")) {
+       if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.channel.send("**You dont have ban_members permission :/ **");
+       if(!User) message.channel.send("**Mention Someone**");
+       if(User.id === client.user.id) return message.channel.send("**Why you want to ban me ? :/**");
+       if(User.id === message.guild.owner.id) return message.channel.send("**Nice try man :> you cant ban the ownership**");
+       if(!time) return message.channel.send("**- اكتب الوقت**");
+       if(!time.match(/[1-60][s,m,h,d,w]/g)) return message.channel.send('**- Error in this Duration**');
+       if(!Reason) message.channel.send("**- اكتب Reason**");
+       let banEmbed = new Discord.RichEmbed()
+       .setAuthor(`New Banned User !`)
+       .setThumbnail(message.guild.iconURL || message.guild.avatarURL)
+       .addField('- Banned By: ',message.author.tag,true)
+       .addField('- Banned User:', `${User}`)
+       .addField('- Reason:',Reason,true)
+       .addField('- Time & Date:', `${message.createdAt}`)
+       .addField('- Duration:',time,true)
+       .setFooter(message.author.tag,message.author.avatarURL);
+       let incidentchannel = message.guild.channels.find(`name`, "incidents");
+  if(!incidentchannel) return message.channel.send("Can't find incidents channel.");
+  incidentchannel.send(banEmbed);
+  message.channel.send(`**:white_check_mark: ${User} has been banned :airplane: **`).then(() => message.guild.member(User).ban({reason: Reason}))
+  User.send(`**:airplane: You are has been banned in ${message.guild.name} reason: ${Reason} by: ${message.author.tag} :airplane:**`)
+       .then(() => { setTimeout(() => {
+           message.guild.unban(User);
+       }, mmss(time));
+    });
+   }
+  });
+
 ////////الباند////////
 
 
@@ -2780,7 +2754,6 @@ if(message.content.startsWith(prefix+"user")) {
  // clear
 
 client.on('message', message => {//Toxic Codes
-	var prefix = "-"; // ????? ????? ._.
    if(!message.channel.guild) return;//Toxic Codes
 if(message.content.startsWith(prefix + 'clear')) {//Toxic Codes
 if(!message.channel.guild) return message.channel.send('**This Command is Just For Servers**').then(m => m.delete(5000));//Toxic Codes
@@ -2821,12 +2794,11 @@ msg.delete();//Toxic Codes
 });//Toxic Codes
 //Toxic Codes
 client.on("message", message => {//Toxic Codes
-    var prefix = "-";//Toxic Codes
             var args = message.content.substring(prefix.length).split(" ");//Toxic Codes
             if (message.content.startsWith(prefix + "clear")) {//Toxic Codes
  if (!args[1]) {//Toxic Codes
                                 let x5bz1 = new Discord.RichEmbed()//Toxic Codes
-                                .setDescription("-clear <number>")//Toxic Codes
+                                .setDescription("&clear <number>")//Toxic Codes
                                 .setColor("RANDOM")//Toxic Codes
                                 message.channel.sendEmbed(x5bz1);//Toxic Codes
                             } else {//Toxic Codes
@@ -2929,49 +2901,7 @@ client.on('message', async message => {
       });
 
 
-client.on('message', message => {
-    if (message.author.x5bz) return;
-    if (!message.content.startsWith(prefix)) return;
-  
-    let command = message.content.split(" ")[0];
-    command = command.slice(prefix.length);
-  
-    let args = message.content.split(" ").slice(1);
-  
-    if (command == "ban") {
-                 if(!message.channel.guild) return message.reply('** This command only for servers**');
-           
-    if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.reply("**You Don't Have ` BAN_MEMBERS ` Permission**");
-    if(!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) return message.reply("**I Don't Have ` BAN_MEMBERS ` Permission**");
-    let user = message.mentions.users.first();
-    let reason = message.content.split(" ").slice(2).join(" ");
-    /*let b5bzlog = client.channels.find("name", "5bz-log");
-  
-    if(!b5bzlog) return message.reply("I've detected that this server doesn't have a 5bz-log text channel.");*/
-    if (message.mentions.users.size < 1) return message.reply("**منشن شخص**");
-    if(!reason) return;
-    if (!message.guild.member(user)
-    .bannable) return message.reply("**لايمكنني طرد شخص اعلى من رتبتي يرجه اعطاء البوت رتبه عالي**");
-  
-    message.guild.member(user).ban(7, user);
-    message.channel.send(`**:white_check_mark: ${user} has been banned :airplane: **`)
-    let banEmbed = new Discord.RichEmbed()
-    .setAuthor(`New Banned User !`)
-    .setThumbnail(message.guild.iconURL || message.guild.avatarURL)
-    .addField('- Banned By: ',message.author.tag,true)
-    .addField('- Banned User:', `${user}`)
-    .addField('- Reason:',reason,true)
-    .addField('- Time & Date:', `${message.createdAt}`)
-    .setFooter(message.author.tag,message.author.avatarURL);
-    let incidentchannel = message.guild.channels.find(`name`, "incidents");
-  if(!incidentchannel) return message.channel.send("Can't find incidents channel.");
-  incidentchannel.send(banEmbed);
-  user.send(`You Are Has Been Banned Permanently In ${message.guild.name} reason: ${reason}`)
-    }})
-	
-	
-	
-	
+
 	
 	
 	
