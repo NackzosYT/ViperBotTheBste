@@ -75,63 +75,63 @@ client.on("message", message => {
 
 
 - PublicOrder
-:small_blue_diamond:&new | لفتح تكت
-:small_orange_diamond:&close | لاغلاق تكت
-:small_blue_diamond:&id | لاضهاء معلوماتك بصوره و رساله
-:small_orange_diamond:&server | لمشاهده معلومات السيرفر
-:small_blue_diamond:&avatar | لعرض صورتك او صوره شخص ما
-:small_orange_diamond:&ping | لمشاهده سرعه البوت
-:small_blue_diamond:&user | معلومات شخص ما
-:small_orange_diamond:&say | لتكرار كل شي تكتبه
+&new | لفتح تكت
+&close | لاغلاق تكت
+&id | لاضهاء معلوماتك بصوره و رساله
+&server | لمشاهده معلومات السيرفر
+&avatar | لعرض صورتك او صوره شخص ما
+&ping | لمشاهده سرعه البوت
+&user | معلومات شخص ما
+&say | لتكرار كل شي تكتبه
 
 
 - AdminOrder
-:small_blue_diamond:&bc | برودكسات للجميع
-:small_orange_diamond:&obc | برودكسات للاونلاين فقط
-:small_blue_diamond:&setlog | نشاء روم اللوق
-:small_orange_diamond:&clear | لمسح الشات
-:small_blue_diamond:&autorole | لتمكين رتبه تلقائيه
-:small_orange_diamond:&ban | لتبنيد شخص من سيرفر
-:small_blue_diamond:&kick | لطرد شخص من سيرفر
-:small_orange_diamond:&role | لاعطاء رتبه لعضو
-:small_blue_diamond:&-role | لازاله رتبه من عضو
-:small_orange_diamond:&temp on | لتشغيل رومات مؤقته
-:small_blue_diamond:&temp off | لايقاف رومات مؤقته
-:small_orange_diamond:&mute | لاعطاء ميوت لعضو
-:small_blue_diamond:&unmute | لازاله الميوت من عضو
-:small_orange_diamond:&mc | لمنع الرسائل في روم
-:small_blue_diamond:&unmc | لتمكين الرسائل في روم
-:small_orange_diamond:&hch | لاخفاء روم
-:small_blue_diamond:&sch | لاضهاء روم
-:small_orange_diamond:&dr | لحذف جميع رتب السيرفر
-:small_blue_diamond:&dc | لحذف جميع رتب السيرفر
-:small_orange_diamond:&setwelcomer | لتمكين الترحيب بالصوره
+&bc | برودكسات للجميع
+&obc | برودكسات للاونلاين فقط
+&setlog | نشاء روم اللوق
+&clear | لمسح الشات
+&autorole | لتمكين رتبه تلقائيه
+&ban | لتبنيد شخص من سيرفر
+&kick | لطرد شخص من سيرفر
+&role | لاعطاء رتبه لعضو
+&-role | لازاله رتبه من عضو
+&temp on | لتشغيل رومات مؤقته
+&temp off | لايقاف رومات مؤقته
+&mute | لاعطاء ميوت لعضو
+&unmute | لازاله الميوت من عضو
+&mc | لمنع الرسائل في روم
+&unmc | لتمكين الرسائل في روم
+&hch | لاخفاء روم
+&sch | لاضهاء روم
+&dr | لحذف جميع رتب السيرفر
+&dc | لحذف جميع رتب السيرفر
+&setwelcomer | لتمكين الترحيب بالصوره
 
 
 - GamesOrder
-:small_blue_diamond:&sra7a | للعب لعبه صراحه
-:small_orange_diamond:&fkk | للعب لعبه فكك
-:small_blue_diamond:&3wasem | للعب لعبه عواصم
-:small_orange_diamond:&tweet | للعب لعبه كت تويت
-:small_blue_diamond:&xo | للعب لعبه اكس اوو
-:small_orange_diamond:&slap | لصفع شخص ما
-:small_blue_diamond:&hug | لعناق شخص ما
-:small_orange_diamond:&poke | لنقر شخص ما
-:small_blue_diamond:&tickle | لدغدغه شخص ما
+&sra7a | للعب لعبه صراحه
+&fkk | للعب لعبه فكك
+&3wasem | للعب لعبه عواصم
+&tweet | للعب لعبه كت تويت
+&xo | للعب لعبه اكس اوو
+&slap | لصفع شخص ما
+&hug | لعناق شخص ما
+&poke | لنقر شخص ما
+&tickle | لدغدغه شخص ما
 
 
 - MusicOrder
 &play | لتشغيل اغنيه
-:small_orange_diamond:&stop | لايقاف اغنيه
-:small_orange_diamond:&vol | لتحكم بصوت اغنيه
-:small_blue_diamond:&queue | لايقاف اغنيه مؤقت
-:small_orange_diamond:&skip | لاتخطي اغنيه
+&stop | لايقاف اغنيه
+&vol | لتحكم بصوت اغنيه
+&queue | لايقاف اغنيه مؤقت
+skip | لاتخطي اغنيه
 
 
 - BotOrder
-:small_blue_diamond:&Support | سيرفر السبورت
-:small_orange_diamond:&bot | معلومات البوت
-:small_blue_diamond:By | <@!538100620238782464>
+&Support | سيرفر السبورت
+&bot | معلومات البوت
+By | <@!538100620238782464>
 
 **`)
    message.author.sendEmbed(embed)
@@ -2667,7 +2667,7 @@ function play(guild, song) {
    
    client.on('message', message => {
     let args = message.content.split(' ').slice(1);
-    if(message.content.startsWith(prefix + '-role')) {
+    if(message.content.startsWith(prefix + 'role')) {
         if(!message.member.hasPermission('MANAGE_ROLES')) return      message.channel.send('**للأسف لا تمتلك صلاحية** `MANAGE_ROLES`' );
     let member = message.mentions.users.first();
     let role = args.join(' ').replace(member, '').replace(args[0], '').replace(' ', '');
@@ -2905,6 +2905,128 @@ client.on("message", message => {//Toxic Codes
 
 
 
+const temp = JSON.parse(fs.readFileSync('./temp.json', 'utf8'));
+client.on('message', async message => {
+ if(message.channel.type === "dm") return;
+  if(message.author.bot) return;
+   if(!temp[message.guild.id]) temp[message.guild.id] = {
+    time: "3000",
+     category : 'click here',
+      channel : 'click here'
+       }
+        if(message.content.startsWith('Btemp on')){
+         if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
+          var ggg= message.guild.createChannel('click here', 'category').then(cg => {
+           var ccc =message.guild.createChannel('click here', 'voice').then(ch => {
+            ch.setParent(cg)
+             message.channel.send('**Done ,**')
+              client.on('message' , message => {
+               if(message.content === 'Btemp off') {
+                if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
+                 cg.delete()
+                  ch.delete()
+                   message.channel.send('**Done ,**')
+                    }
+                     });
+                      const time = temp[message.guild.id].time
+                       client.on('message' , message => {
+                        if (message.content.startsWith(prefix + "temptime")) {
+                         if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
+                          let newTime= message.content.split(' ').slice(1).join(" ")
+                          if(!newTime) return message.reply(`**${prefix}temptime <time>  \`1000 = 1s\`**`)
+	                 if(isNaN(newTime)) return message.reply(`** The Time Be Nambers :face_palm: **`);
+	                if(newTime < 1) return message.reply(`**The Time Be Up \`3000s\`**`)
+                       temp[message.guild.id].time = newTime
+                      message.channel.send(`**Temp Rooms Time Change To \`${newTime}\`**`);
+                     }
+                    });
+                   client.on('voiceStateUpdate', (old, neww) => {
+                  let newUserChannel = neww.voiceChannel
+                 let oldUserChannel = old.voiceChannel
+                temp[message.guild.id].category = cg.id
+               temp[message.guild.id].channel = ch.id
+              let channel = temp[message.guild.id].channel
+             let category = temp[message.guild.id].category
+            if(oldUserChannel === undefined && newUserChannel !== undefined && newUserChannel.id == channel) {
+           neww.guild.createChannel(neww.displayName , 'voice').then(c => {
+          c.setParent(category)
+         let scan = setTimeout(()=>{
+        if(!neww.voiceChannel) {
+       c.delete();
+      client.channels.get(channel).overwritePermissions(neww, {
+     CONNECT:true,
+    SPEAK:true
+   })
+  }
+ }, temp[neww.guild.id].time);
+  c.overwritePermissions(neww, {
+   CONNECT:true,
+    SPEAK:true,
+     MANAGE_CHANNEL:true,
+      MUTE_MEMBERS:true,
+       DEAFEN_MEMBERS:true,
+	MOVE_MEMBERS:true,
+	 VIEW_CHANNEL:true
+	  })
+	   neww.setVoiceChannel(c)
+            })
+             client.channels.get(channel).overwritePermissions(neww, {
+	      CONNECT:false,
+	       SPEAK:false
+		})
+               }
+              })
+             })
+           })
+          }
+         fs.writeFile("./temp.json", JSON.stringify(temp), (err) => {
+        if(err) console.error(err)
+       })
+      });
+
+
+client.on('message', message => {
+    if (message.author.x5bz) return;
+    if (!message.content.startsWith(prefix)) return;
+  
+    let command = message.content.split(" ")[0];
+    command = command.slice(prefix.length);
+  
+    let args = message.content.split(" ").slice(1);
+  
+    if (command == "ban") {
+                 if(!message.channel.guild) return message.reply('** This command only for servers**');
+           
+    if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.reply("**You Don't Have ` BAN_MEMBERS ` Permission**");
+    if(!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) return message.reply("**I Don't Have ` BAN_MEMBERS ` Permission**");
+    let user = message.mentions.users.first();
+    let reason = message.content.split(" ").slice(2).join(" ");
+    /*let b5bzlog = client.channels.find("name", "5bz-log");
+  
+    if(!b5bzlog) return message.reply("I've detected that this server doesn't have a 5bz-log text channel.");*/
+    if (message.mentions.users.size < 1) return message.reply("**منشن شخص**");
+    if(!reason) return;
+    if (!message.guild.member(user)
+    .bannable) return message.reply("**لايمكنني طرد شخص اعلى من رتبتي يرجه اعطاء البوت رتبه عالي**");
+  
+    message.guild.member(user).ban(7, user);
+    message.channel.send(`**:white_check_mark: ${user} has been banned :airplane: **`)
+    let banEmbed = new Discord.RichEmbed()
+    .setAuthor(`New Banned User !`)
+    .setThumbnail(message.guild.iconURL || message.guild.avatarURL)
+    .addField('- Banned By: ',message.author.tag,true)
+    .addField('- Banned User:', `${user}`)
+    .addField('- Reason:',reason,true)
+    .addField('- Time & Date:', `${message.createdAt}`)
+    .setFooter(message.author.tag,message.author.avatarURL);
+    let incidentchannel = message.guild.channels.find(`name`, "incidents");
+  if(!incidentchannel) return message.channel.send("Can't find incidents channel.");
+  incidentchannel.send(banEmbed);
+  user.send(`You Are Has Been Banned Permanently In ${message.guild.name} reason: ${reason}`)
+    }})
+	
+	
+	
 
 
 client.login(process.env.BOT_TOKEN); 
