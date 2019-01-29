@@ -68,70 +68,70 @@ client.on("message", message => {
          .setColor("#8650a7")
          .setThumbnail(message.author.avatarURL)
          .setDescription(`**
-- ViperBot
-- حمايه فائقه من التهكير والجحفله
-- استجابه سريعه وشغال 24 ساعه
-- اوامر مطوره وسهله الاستخدام
+- ViperBot:leaves: 
+- حمايه فائقه من التهكير والجحفله:no_mobile_phones: 
+- استجابه سريعه وشغال 24 ساعه:arrows_counterclockwise: 
+- اوامر مطوره وسهله الاستخدام:black_nib: 
 
 
 - PublicOrder
-&new | لفتح تكت
-&close | لاغلاق تكت
-&id | لاضهاء معلوماتك بصوره و رساله
-&server | لمشاهده معلومات السيرفر
-&avatar | لعرض صورتك او صوره شخص ما
-&ping | لمشاهده سرعه البوت
-&user | معلومات شخص ما
-&say | لتكرار كل شي تكتبه
+:small_blue_diamond:&new | لفتح تكت
+:small_orange_diamond:&close | لاغلاق تكت
+:small_blue_diamond:&id | لاضهاء معلوماتك بصوره و رساله
+:small_orange_diamond:&server | لمشاهده معلومات السيرفر
+:small_blue_diamond:&avatar | لعرض صورتك او صوره شخص ما
+:small_orange_diamond:&ping | لمشاهده سرعه البوت
+:small_blue_diamond:&user | معلومات شخص ما
+:small_orange_diamond:&say | لتكرار كل شي تكتبه
 
 
 - AdminOrder
-&bc | برودكسات للجميع
-&obc | برودكسات للاونلاين فقط
-&setlog | نشاء روم اللوق
-&clear | لمسح الشات
-&autorole | لتمكين رتبه تلقائيه
-&ban | لتبنيد شخص من سيرفر
-&kick | لطرد شخص من سيرفر
-&role | لاعطاء رتبه لعضو
-&-role | لازاله رتبه من عضو
-&temp on | لتشغيل رومات مؤقته
-&temp off | لايقاف رومات مؤقته
-&mute | لاعطاء ميوت لعضو
-&unmute | لازاله الميوت من عضو
-&mc | لمنع الرسائل في روم
-&unmc | لتمكين الرسائل في روم
-&hch | لاخفاء روم
-&sch | لاضهاء روم
-&dr | لحذف جميع رتب السيرفر
-&dc | لحذف جميع رتب السيرفر
-&setwelcomer | لتمكين الترحيب بالصوره
+:small_blue_diamond:&bc | برودكسات للجميع
+:small_orange_diamond:&obc | برودكسات للاونلاين فقط
+:small_blue_diamond:&setlog | نشاء روم اللوق
+:small_orange_diamond:&clear | لمسح الشات
+:small_blue_diamond:&autorole | لتمكين رتبه تلقائيه
+:small_orange_diamond:&ban | لتبنيد شخص من سيرفر
+:small_blue_diamond:&kick | لطرد شخص من سيرفر
+:small_orange_diamond:&role | لاعطاء رتبه لعضو
+:small_blue_diamond:&-role | لازاله رتبه من عضو
+:small_orange_diamond:&temp on | لتشغيل رومات مؤقته
+:small_blue_diamond:&temp off | لايقاف رومات مؤقته
+:small_orange_diamond:&mute | لاعطاء ميوت لعضو
+:small_blue_diamond:&unmute | لازاله الميوت من عضو
+:small_orange_diamond:&mc | لمنع الرسائل في روم
+:small_blue_diamond:&unmc | لتمكين الرسائل في روم
+:small_orange_diamond:&hch | لاخفاء روم
+:small_blue_diamond:&sch | لاضهاء روم
+:small_orange_diamond:&dr | لحذف جميع رتب السيرفر
+:small_blue_diamond:&dc | لحذف جميع رتب السيرفر
+:small_orange_diamond:&setwelcomer | لتمكين الترحيب بالصوره
 
 
 - GamesOrder
-&sra7a | للعب لعبه صراحه
-&fkk | للعب لعبه فكك
-&3wasem | للعب لعبه عواصم
-&tweet | للعب لعبه كت تويت
-&xo | للعب لعبه اكس اوو
-&slap | لصفع شخص ما
-&hug | لعناق شخص ما
-&poke | لنقر شخص ما
-&tickle | لدغدغه شخص ما
+:small_blue_diamond:&sra7a | للعب لعبه صراحه
+:small_orange_diamond:&fkk | للعب لعبه فكك
+:small_blue_diamond:&3wasem | للعب لعبه عواصم
+:small_orange_diamond:&tweet | للعب لعبه كت تويت
+:small_blue_diamond:&xo | للعب لعبه اكس اوو
+:small_orange_diamond:&slap | لصفع شخص ما
+:small_blue_diamond:&hug | لعناق شخص ما
+:small_orange_diamond:&poke | لنقر شخص ما
+:small_blue_diamond:&tickle | لدغدغه شخص ما
 
 
 - MusicOrder
 &play | لتشغيل اغنيه
-&stop | لايقاف اغنيه
-&vol | لتحكم بصوت اغنيه
-&queue | لايقاف اغنيه مؤقت
-&skip | لاتخطي اغنيه
+:small_orange_diamond:&stop | لايقاف اغنيه
+:small_orange_diamond:&vol | لتحكم بصوت اغنيه
+:small_blue_diamond:&queue | لايقاف اغنيه مؤقت
+:small_orange_diamond:&skip | لاتخطي اغنيه
 
 
 - BotOrder
-&Support | سيرفر السبورت
-&bot | معلومات البوت
-By | <@!538100620238782464>
+:small_blue_diamond:&Support | سيرفر السبورت
+:small_orange_diamond:&bot | معلومات البوت
+:small_blue_diamond:By | <@!538100620238782464>
 
 **`)
    message.author.sendEmbed(embed)
@@ -144,7 +144,7 @@ client.on('message', message => {
      let embed = new Discord.RichEmbed()
   .setAuthor(message.author.username)
   .setColor("#8650a7")
-  .addField("Done" , " الرسالة انرسلت لك بالخاص ")
+  .addField("Done:white_check_mark:" , " الرسالة انرسلت لك بالخاص ")
   message.channel.sendEmbed(embed);
     }
 });
@@ -153,7 +153,7 @@ client.on('message', message => {
 
 client.on("message", message => {
     if (message.content === "&support") {
-         message.channel.send(":white_check_mark: I've DMed you with my support server");
+         message.channel.send("Done:white_check_mark: الرسالة انرسلت لك بالخاص ");
      const embed = new Discord.RichEmbed()
          .setColor("RANDOM")
          .setFooter('© ViperBot جميع القوق محفوظة 2019 لــ')
