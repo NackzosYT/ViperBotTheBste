@@ -1,4 +1,4 @@
-﻿const Discord = require('discord.js');  
+const Discord = require('discord.js');  
 const db = require('quick.db');  
 const hastebin = require('hastebin-gen');  
 const client = new Discord.Client();    
@@ -127,18 +127,12 @@ client.on("guildMemberAdd", member => {
                             
     welcomer.sendFile(canvas.toBuffer())
       
-        member.guild.fetchInvites().then(guildInvites => {
-    const ei = invites[member.guild.id];
-    const invite = guildInvites.find(i => ei.get(i.code).uses < i.uses);
-    const inviter = client.users.get(invite.inviter.id);
-    const xkiller = member.guild.channels.find("name", "sChannel);
-     xkiller.send(`<@${member.user.id}> تمت الدعوه من <@${inviter.id}>`);
+
       })
       })
       
       }
       });
-});
 /////////////welcome//////////
 
 
