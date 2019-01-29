@@ -65,7 +65,7 @@ client.on('message', async message => {  //itzZa1D & Toxic Codes
 client.on("message", message => {
     if (message.content === (prefix + "help")) {
      const embed = new Discord.RichEmbed() 
-         .setColor("#RANDOM")
+         .setColor("#8650a7")
          .setThumbnail(message.author.avatarURL)
          .setDescription(`**
 - ViperBot
@@ -145,7 +145,6 @@ client.on('message', message => {
   .setAuthor(message.author.username)
   .setColor("#8650a7")
   .addField("Done" , " الرسالة انرسلت لك بالخاص ")
-  .addField("تاكد انك مو معطي بوت بلوك او مسكر خاصك" , "شكرا لاستخدامكم  بوتكم F5R BOT ")
   message.channel.sendEmbed(embed);
     }
 });
