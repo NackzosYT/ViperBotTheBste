@@ -603,7 +603,7 @@ client.on('message', message => {
 
 if(!message.guild) return
   if(!ar[message.guild.id]) ar[message.guild.id] = {
-  onoff: 'Off',
+  onoff: 'ON',
   role: 'Member'
   }
 
