@@ -38,6 +38,107 @@ client.user.setGame(`&help | ViperBot`,'https://www.twitch.tv/nackzos');
 
 
 
+
+
+client.on("message", message => {
+    if (message.content === (prefix + "help")) {
+     const embed = new Discord.RichEmbed() 
+         .setColor("#RANDOM")
+         .setThumbnail(message.author.avatarURL)
+         .setDescription(`**
+- ViperBot
+- حمايه فائقه من التهكير والجحفله
+- استجابه سريعه وشغال 24 ساعه
+- اوامر مطوره وسهله الاستخدام
+
+
+- PublicOrder
+&new | لفتح تكت
+&close | لاغلاق تكت
+&id | لاضهاء معلوماتك بصوره و رساله
+&server | لمشاهده معلومات السيرفر
+&avatar | لعرض صورتك او صوره شخص ما
+&ping | لمشاهده سرعه البوت
+&user | معلومات شخص ما
+
+
+- AdminOrder
+&setlog | قريبا
+&autorole | لتمكين رتبه تلقائيه
+&ban | لتبنيد شخص من سيرفر
+&kick | لطرد شخص من سيرفر
+&role | لاعطاء رتبه لعضو
+&-role | لازاله رتبه من عضو
+&temp on | لتشغيل رومات مؤقته
+&temp off | لايقاف رومات مؤقته
+&mute | لاعطاء ميوت لعضو
+&unmute | لازاله الميوت من عضو
+&mc | لمنع الرسائل في روم
+&unmc | لتمكين الرسائل في روم
+&hch | لاخفاء روم
+&sch | لاضهاء روم
+&dr | لحذف جميع رتب السيرفر
+&dc | لحذف جميع رتب السيرفر
+&setwelcomer | لتمكين الترحيب بالصوره
+
+
+- GamesOrder
+&sra7a | للعب لعبه صراحه
+&fkk | للعب لعبه فكك
+&3wasem | للعب لعبه عواصم
+&tweet | للعب لعبه كت تويت
+&speed | للعب لعبه اسرع كتابه
+&xo | للعب لعبه اكس اوو
+&slap | لصفع شخص ما
+&hug | لعناق شخص ما
+&poke | لنقر شخص ما
+&tickle | لدغدغه شخص ما
+
+
+- MusicOrder
+&play | لتشغيل اغنيه
+&stop | لايقاف اغنيه
+&vol | لتحكم بصوت اغنيه
+&queue | لايقاف اغنيه مؤقت
+&skip | لاتخطي اغنيه
+
+
+- BotOrder
+&Support | سيرفر السبورت
+&bot | معلومات البوت
+By | <@!538100620238782464>
+
+**`)
+   message.author.sendEmbed(embed)
+   
+   }
+   });
+  
+client.on('message', message => {
+     if (message.content === (prefix + "help")) {
+     let embed = new Discord.RichEmbed()
+  .setAuthor(message.author.username)
+  .setColor("#8650a7")
+  .addField("Done" , " الرسالة انرسلت لك بالخاص ")
+  .addField("تاكد انك مو معطي بوت بلوك او مسكر خاصك" , "شكرا لاستخدامكم  بوتكم F5R BOT ")
+  message.channel.sendEmbed(embed);
+    }
+});
+
+
+
+client.on("message", message => {
+    if (message.content === "&support") {
+         message.channel.send(":white_check_mark: I've DMed you with my support server");
+     const embed = new Discord.RichEmbed()
+         .setColor("RANDOM")
+         .setFooter('© ViperBot جميع القوق محفوظة 2019 لــ')
+         .addField('سيرفر الدعم الفني', `https://discord.gg/TsRXyxR`)
+     message.author.send({embed});
+    }
+   });
+
+
 /////////////welcome//////////
 const sWlc = {}
 client.on('message', message => {
@@ -418,46 +519,6 @@ client.on('message', message => {       ///Toxic Codes
 
 
 
-
-
-//////////كود فويس كيك/////////
-client.on("message", message => {
-  let mmember = message.mentions.users.first();
-  if(message.content.startsWith(prefix + "vkick")) {
-    try {
-    if(!mmember) {
-      message.channel.send("Write The User");
-      return;
-    }
-    if(!message.guild.member(mmember).voiceChannel) return message.channel.send("The User Is Not In A Voice Channel");
-    let rank = message.guild.member(message.author).roles.find('name', 'اسم الرتبه الي تستخدم الكوماند');
-
-    if (!rank) return message.channel.send('You Dont Have Perm');
-
-    message.guild.createChannel("vkick", "voice").then(c => {
-      message.guild.member(mmember).setVoiceChannel(c.id)
-    setTimeout(() => {
-      c.delete()
-    }, 100)
-    });
-    message.channel.send(**${member.tag} Has Been Kicked from The Voice Channel**)
-} catch (e) {
-  message.channel.send("");
-}
-  const embed = new Discord.RichEmbed()
-    .setColor("RANDOM")
-    .setAuthor("New Voice Kick", mmember.displayAvatarURL)
-    .setThumbnail(message.author.avatarURL)
-    .addField("Voice Kicked User:", [${mmember.tag}])
-    .addField("User Kicked By:", [${message.author.username}]);
-
-     let vKickChannel = message.guild.channels.find(name,"log");
-
-      message.delete().catch(O_o=>{});
-      vKickChannel.send(embed);
-  }
-});
-//////////كود فويس كيك/////////
 
 
 
@@ -2450,8 +2511,824 @@ var aoasm =[
 
 
 
+///hug
+client.on('message', message => {
+ if(message.content.startsWith(prefix + 'hug')) {
+   let args = message.content.split(" ").slice(1);
+    let hug = [
+        "https://78.media.tumblr.com/28e86413485a973ae859a745a7a5382e/tumblr_o1hf0uK2NL1uapp8co1_500.gif",
+        "https://78.media.tumblr.com/18fdf4adcb5ad89f5469a91e860f80ba/tumblr_oltayyHynP1sy5k7wo1_500.gif",
+        "https://78.media.tumblr.com/e790af0168cd80394b7d792dde07407b/tumblr_o76qfcMiFn1sk1rjvo1_500.gif",
+        "https://78.media.tumblr.com/350c512200d6cbb6506774f2cddc9641/tumblr_ooonx9vM691qzxv73o1_500.gif",
+        "https://78.media.tumblr.com/5dfb67d0a674fe5f81950478f5b2d4ed/tumblr_ofd4e2h8O81ub9qlao1_500.gif",
+        "https://78.media.tumblr.com/21f89b12419bda49ce8ee33d50f01f85/tumblr_o5u9l1rBqg1ttmhcxo1_500.gif",
+        "https://78.media.tumblr.com/ebc214f892af851ffd7297e0e6212cdb/tumblr_o2kwkfyzT01uprh6zo1_500.gif",
+        "https://78.media.tumblr.com/5fa89acc3637b84a29c6f528c1727135/tumblr_o3kyyxj5nF1unech7o1_500.gif",
+        "https://78.media.tumblr.com/443c4235cae34242d014e2bb1276810d/tumblr_orldmdZJ2x1vb10byo1_500.gif",
+        "https://78.media.tumblr.com/b8ce553824c59700049256fbc825390b/tumblr_ojf72iRAty1v312ebo1_500.gif",
+        "https://78.media.tumblr.com/2fe074ad467af41a8230b8d9d8e322f1/tumblr_omvj49wYnq1v8tshbo1_500.gif",
+        "https://78.media.tumblr.com/9956a4b53345e4031faccf8174cadb68/tumblr_ozy26yVcBu1ql0375o1_500.gif",
+        "https://78.media.tumblr.com/14f5e0c6ef88280f75017987302a7dad/tumblr_o31a2iJsCw1uprh6zo1_500.gif",
+        "https://78.media.tumblr.com/5e2130af66f9c548059c6452d1b55e03/tumblr_p8zuex4xZo1qzxv73o1_500.gif",
+        "https://i.gifer.com/8WPN.mp4",
+        "https://i.gifer.com/GAMC.gif",
+    ]
+    let hugresult = Math.floor((Math.random() * hug.length));
+    if (!args[0]) {
+        const ghembed = new Discord.RichEmbed()
+        .setColor("RANDOM")
+            .setTitle(`${message.author.username} Sorry to see you alone...`)
+            .setImage('https://78.media.tumblr.com/9d9be702d1dda0559809d920bf1d01d1/tumblr_inline_nrw2mfIFBh1qafrh6_400.gif')
+        message.channel.send({
+            embed: ghembed
+        })
+        return;
+     }
+    if (!message.mentions.members.first().user.username === message.isMentioned(message.author)) {
+        const hembed = new Discord.RichEmbed()
+        .setColor("RANDOM")
+            .setTitle(`${message.mentions.members.first().user.username} you have been hugged by ${message.author.username}`)
+            .setImage(hug[hugresult])
+        message.channel.send({
+            embed: hembed
+        })
+        return;
+    }
+    const ghembed = new Discord.RichEmbed()
+        .setColor(RANDOM)
+        .setTitle(`${message.author.username} Sorry to see you alone...`)
+        .setImage('https://78.media.tumblr.com/9d9be702d1dda0559809d920bf1d01d1/tumblr_inline_nrw2mfIFBh1qafrh6_400.gif')
+    message.channel.send({
+        embed: ghembed
+    })
+}
+});
+///end
+
+
+///end
+
+///slap
+client.on('message', message => {
+ if(message.content.startsWith(prefix + 'slap')) {
+   let args = message.content.split(" ").slice(1);
+    let hug = [
+        "https://cdn.discordapp.com/attachments/466949822604247044/467005787189805066/Slap_6.gif",
+        "https://cdn.discordapp.com/attachments/466949822604247044/467005776880336896/Slap_9.gif",
+        "https://cdn.discordapp.com/attachments/466949822604247044/467005776515563520/Slap_11.gif",
+        "https://cdn.discordapp.com/attachments/466949822604247044/467005770114793492/Slap_8.gif",
+        "https://cdn.discordapp.com/attachments/466949822604247044/467005766608486431/Slap_12.gif",
+        "https://cdn.discordapp.com/attachments/466949822604247044/467005763814948864/Slap_13.gif",
+        "https://cdn.discordapp.com/attachments/466949822604247044/467005759167791106/Slap_14.gif",
+        "https://cdn.discordapp.com/attachments/466949822604247044/467005741694451713/Slap_5.gif",
+        "https://cdn.discordapp.com/attachments/466949822604247044/467005741216169984/Slap_2.gif",
+        "https://cdn.discordapp.com/attachments/466949822604247044/467005739530190865/Slap_4.gif",
+        "https://cdn.discordapp.com/attachments/466949822604247044/467005740603801600/Slap_1.gif",
+        "https://cdn.discordapp.com/attachments/466949822604247044/467005738804445185/Slap_3.gif",
+        "https://cdn.discordapp.com/attachments/466949822604247044/467005734412877854/Slap.gif",
+        "https://cdn.discordapp.com/attachments/466949822604247044/466953715039993856/staph_it.gif",
+        "https://cdn.discordapp.com/attachments/466949822604247044/466951859148554260/nu.gif",
+        "https://media0.giphy.com/media/fO6UtDy5pWYwM/giphy.gif",
+    ]
+    let hugresult = Math.floor((Math.random() * hug.length));
+    if (!args[0]) {
+        const ghembed = new Discord.RichEmbed()
+        .setColor("RANDOM")
+            .setTitle(``)
+            .setImage('')
+        message.channel.send({
+            embed: ghembed
+        })
+        return;
+     }
+    if (!message.mentions.members.first().user.username === message.isMentioned(message.author)) {
+        const hembed = new Discord.RichEmbed()
+        .setColor("RANDOM")
+            .setTitle(`${message.mentions.members.first().user.username} you have been slapped by ${message.author.username}`)
+            .setImage(hug[hugresult])
+        message.channel.send({
+            embed: hembed
+        })
+        return;
+    }
+    const ghembed = new Discord.RichEmbed()
+        .setColor(RANDOM)
+        .setTitle(``)
+        .setImage('')
+    message.channel.send({
+        embed: ghembed
+    })
+}
+});
+///end
+
+///pat
+client.on('message', message => {
+ if(message.content.startsWith(prefix + 'pat')) {
+   let args = message.content.split(" ").slice(1);
+    let hug = [
+        "https://cdn.discordapp.com/attachments/466949822604247044/467186871290822657/pat-B1SOzCV0W.gif",
+        "https://cdn.discordapp.com/attachments/466949822604247044/466954354927337472/26d886c039e5f438d36c22964f1e79d0.gif",
+        "https://cdn.discordapp.com/attachments/466949822604247044/466952080750280724/tenor.gif",
+        "https://cdn.discordapp.com/attachments/466949822604247044/466951974726664192/1506871682_tumblr_o925gmua611uhpv9wo1_540.gif",
+        "https://cdn.discordapp.com/attachments/466949822604247044/466951961439109130/pets.gif",
+        "https://cdn.discordapp.com/attachments/466949822604247044/466951936873201664/tenor-1.gif",
+        "https://media2.giphy.com/media/109ltuoSQT212w/giphy.gif",
+        "https://media3.giphy.com/media/ye7OTQgwmVuVy/giphy.gif",
+        "https://media1.giphy.com/media/ARSp9T7wwxNcs/giphy.gif",
+        "https://media2.giphy.com/media/aPOuFhSOoeoAo/giphy.gif",
+        "https://media0.giphy.com/media/L2z7dnOduqEow/giphy.gif",
+        "https://media0.giphy.com/media/X9MUeQelKifU4/giphy.gif",
+        "https://media.giphy.com/media/4HP0ddZnNVvKU/giphy.gif",
+        "https://media1.giphy.com/media/e7xQm1dtF9Zni/giphy.gif",
+        "https://78.media.tumblr.com/6d55745d63a3829693ce68a71ddbd218/tumblr_ox5dckEwTQ1rupogao1_500.gif",
+        "https://78.media.tumblr.com/59074e59e5563e15623216e3e33cd259/tumblr_ojt62uIuDB1vztiw8o1_500.gif",
+    ]
+    let hugresult = Math.floor((Math.random() * hug.length));
+    if (!args[0]) {
+        const ghembed = new Discord.RichEmbed()
+        .setColor("RANDOM")
+            .setTitle(``)
+            .setImage('')
+        message.channel.send({
+            embed: ghembed
+        })
+        return;
+     }
+    if (!message.mentions.members.first().user.username === message.isMentioned(message.author)) {
+        const hembed = new Discord.RichEmbed()
+        .setColor("RANDOM")
+            .setTitle(`${message.mentions.members.first().user.username} you have been patted by ${message.author.username}`)
+            .setImage(hug[hugresult])
+        message.channel.send({
+            embed: hembed
+        })
+        return;
+    }
+    const ghembed = new Discord.RichEmbed()
+        .setColor(RANDOM)
+        .setTitle(``)
+        .setImage('')
+    message.channel.send({
+        embed: ghembed
+    })
+}
+});
+///end
+
+///cuddle
+client.on('message', message => {
+ if(message.content.startsWith(prefix + 'cuddle')) {
+   let args = message.content.split(" ").slice(1);
+    let hug = [
+        "https://cdn.discordapp.com/attachments/466949822604247044/467005578548346900/Cuddle6.gif",
+        "https://cdn.discordapp.com/attachments/466949822604247044/467005575511932928/Cuddle7.gif",
+        "https://cdn.discordapp.com/attachments/466949822604247044/467005570692677645/Cuddle4.gif",
+        "https://cdn.discordapp.com/attachments/466949822604247044/467005567144165377/Cuddle3.gif",
+        "https://cdn.discordapp.com/attachments/466949822604247044/466952826917093396/cuddlez.gif",
+        "https://i.imgur.com/IrY5w46.gif",
+        "https://i.imgur.com/lGeXeTQ.gif",
+        "https://i.imgur.com/0AaS08b.gif",
+        "https://cdn.discordapp.com/attachments/347377586017665027/467497200792895498/cuddle-rkA6SU7w-.gif",
+        "https://cdn.discordapp.com/attachments/467499708068265994/467499871138611204/cuddle-rylgIUmPW.gif",
+        "https://cdn.discordapp.com/attachments/467499708068265994/467500001669545985/cuddle-HkUlIUXDZ.gif",
+        "https://cdn.discordapp.com/attachments/467499708068265994/467500500821213194/cuddle-ryURHLXP-.gif",
+        "https://cdn.discordapp.com/attachments/467499708068265994/467500585667788812/cuddle-r1Q0HImPZ.gif",
+        "https://cdn.discordapp.com/attachments/467499708068265994/467500675098607618/cuddle-rk2-UL7PW.gif",
+        "https://cdn.discordapp.com/attachments/467499708068265994/467501362322604035/cuddle-rJ6zAkc1f.gif",
+        "https://cdn.discordapp.com/attachments/467499708068265994/467501503813386242/cuddle-r1s9RqB7G.gif",
+    ]
+    let hugresult = Math.floor((Math.random() * hug.length));
+    if (!args[0]) {
+        const ghembed = new Discord.RichEmbed()
+        .setColor("RANDOM")
+            .setTitle(`${message.author.username} Sorry to see you alone...`)
+            .setImage('https://cdn.discordapp.com/attachments/466949822604247044/467005738804445185/Slap_3.gif')
+        message.channel.send({
+            embed: ghembed
+        })
+        return;
+     }
+    if (!message.mentions.members.first().user.username === message.isMentioned(message.author)) {
+        const hembed = new Discord.RichEmbed()
+        .setColor("RANDOM")
+            .setTitle(`${message.mentions.members.first().user.username} you have been cuddled by ${message.author.username}`)
+            .setImage(hug[hugresult])
+        message.channel.send({
+            embed: hembed
+        })
+        return;
+    }
+    const ghembed = new Discord.RichEmbed()
+        .setColor(RANDOM)
+        .setTitle(`${message.author.username} Sorry to see you alone...`)
+        .setImage('https://cdn.discordapp.com/attachments/466949822604247044/467005738804445185/Slap_3.gif')
+    message.channel.send({
+        embed: ghembed
+    })
+}
+});
+///end
+
+///poke
+client.on('message', message => {
+ if(message.content.startsWith(prefix + 'poke')) {
+   let args = message.content.split(" ").slice(1);
+    let hug = [
+        "https://cdn.discordapp.com/attachments/467499708068265994/467507303432585227/poke-rJzUe1FwZ.gif",
+        "https://cdn.discordapp.com/attachments/467499708068265994/467509021793058857/poke-B14SJlTQG.gif",
+        "https://cdn.discordapp.com/attachments/467499708068265994/467509321412902922/poke-HJZpLxkKDb.gif",
+        "https://cdn.discordapp.com/attachments/467499708068265994/467509460458405888/poke-SydLxJFwW.gif",
+        "https://cdn.discordapp.com/attachments/467499708068265994/467509552024256515/poke-BJhIekKwb.gif",
+        "https://cdn.discordapp.com/attachments/467499708068265994/467509933626097674/poke-B1oSgytwW.gif",
+        "https://cdn.discordapp.com/attachments/467499708068265994/467509931084480522/poke-r1v6xoh0Z.gif",
+        "https://cdn.discordapp.com/attachments/467499708068265994/467509944338481152/poke-H1fMRpYtb.gif",
+        "https://cdn.discordapp.com/attachments/467499708068265994/467509925052940288/poke-rkB8eJYPZ.gif",
+        "https://cdn.discordapp.com/attachments/467499708068265994/467511056240082954/poke-rJ0hlsnR-.gif",
+        "https://cdn.discordapp.com/attachments/467499708068265994/467511147927699474/poke-H1x2HxyYD-.gif",
+        "https://cdn.weeb.sh/images/rkeaUeJKD-.gif",
+        "https://cdn.weeb.sh/images/HkxwlkKPb.gif",
+        "https://cdn.weeb.sh/images/SyQzRaFFb.gif",
+        "https://cdn.weeb.sh/images/rkaUe1YPb.gif",
+        "https://cdn.weeb.sh/images/BkcSekKwb.gif",
+    ]
+    let hugresult = Math.floor((Math.random() * hug.length));
+    if (!args[0]) {
+        const ghembed = new Discord.RichEmbed()
+        .setColor("RANDOM")
+            .setTitle(`Are you trying to poke thin air...?`)
+            .setImage('')
+        message.channel.send({
+            embed: ghembed
+        })
+        return;
+     }
+    if (!message.mentions.members.first().user.username === message.isMentioned(message.author)) {
+        const hembed = new Discord.RichEmbed()
+        .setColor("RANDOM")
+            .setTitle(`${message.mentions.members.first().user.username} you have been poked by ${message.author.username}`)
+            .setImage(hug[hugresult])
+        message.channel.send({
+            embed: hembed
+        })
+        return;
+    }
+    const ghembed = new Discord.RichEmbed()
+        .setColor(RANDOM)
+        .setTitle(`Are you trying to poke thin air...?`)
+        .setImage('')
+    message.channel.send({
+        embed: ghembed
+    })
+}
+});
+///end
+
+///tickle
+client.on('message', message => {
+ if(message.content.startsWith(prefix + 'tickle')) {
+   let args = message.content.split(" ").slice(1);
+    let hug = [
+        "https://cdn.weeb.sh/images/rkPzIyQi-.gif",
+        "https://cdn.discordapp.com/attachments/467499708068265994/467599200432160768/tickle-HyjNLkXiZ.gif",
+        "https://cdn.discordapp.com/attachments/467499708068265994/467599311002271744/tickle-rybRByXjZ.gif",
+        "https://cdn.discordapp.com/attachments/466949822604247044/467005567144165377/Cuddle3.gif",
+        "https://cdn.discordapp.com/attachments/466949822604247044/466952826917093396/cuddlez.gif",
+        "https://cdn.discordapp.com/attachments/467499708068265994/467599392426426369/tickle-SyGQIk7i-.gif",
+        "https://cdn.discordapp.com/attachments/467499708068265994/467599512366612520/tickle-HyPyUymsb.gif",
+        "https://cdn.discordapp.com/attachments/467499708068265994/467607824135094315/tickle-SyQHUy7oW.gif",
+        "https://cdn.discordapp.com/attachments/467499708068265994/467607970268708865/tickle-Byj7LJmiW.gif",
+        "https://cdn.weeb.sh/images/H1p0ByQo-.gif",
+        "https://cdn.weeb.sh/images/SkmEI1mjb.gif",
+        "https://78.media.tumblr.com/2d29fdbf47fd756caaea08f44b7eac92/tumblr_inline_ow4u7pIhWJ1u544cj_540.gif",
+        "https://78.media.tumblr.com/eb8a0282d62c9697b93cd546b77106f8/tumblr_o505jxtnWk1vpbklao2_500.gif",
+        "https://media.giphy.com/media/349HKeODRMQ36/giphy.gif",
+        "https://media.giphy.com/media/IRKHf3hD2xsre/giphy.gif",
+    ]
+    let hugresult = Math.floor((Math.random() * hug.length));
+    if (!args[0]) {
+        const ghembed = new Discord.RichEmbed()
+        .setColor("RANDOM")
+            .setTitle(`*giggles* :heart:`)
+            .setImage('')
+        message.channel.send({
+            embed: ghembed
+        })
+        return;
+     }
+    if (!message.mentions.members.first().user.username === message.isMentioned(message.author)) {
+        const hembed = new Discord.RichEmbed()
+        .setColor("RANDOM")
+            .setTitle(`${message.mentions.members.first().user.username} you got tickled by ${message.author.username}`)
+            .setImage(hug[hugresult])
+        message.channel.send({
+            embed: hembed
+        })
+        return;
+    }
+    const ghembed = new Discord.RichEmbed()
+        .setColor(RANDOM)
+        .setTitle(`${message.mentions.members.first().user.username} you got tickled by ${message.author.username}`)
+        .setImage('')
+    message.channel.send({
+        embed: ghembed
+    })
+}
+});
+///end
+//////////////////
+
+const ytdl = require("ytdl-core");
+const { Client, Util } = require('discord.js');
+const getYoutubeID = require('get-youtube-id');
+const fetchVideoInfo = require('youtube-info');
+const YouTube = require('simple-youtube-api');
+const youtube = new YouTube("AIzaSyAdORXg7UZUo7sePv97JyoDqtQVi3Ll0b8");
+const queue = new Map();
+/*
+البكجآت
+npm install discord.js
+npm install ytdl-core
+npm install get-youtube-id
+npm install youtube-info
+npm install simple-youtube-api
+npm install queue
+*/
+
+client.on('ready', () => {
+    console.log(`Logged in as ${client.user.tag}!`);
+    console.log(`in ${client.guilds.size} servers `)
+    console.log(`[ ] ${client.users.size}`)
+    client.user.setStatus("idle")
+});
+client.on('ready', () => {
+     client.user.setActivity(".#ViperBot",{type: 'Server'});
+
+});
+
+client.on('message', async msg => {
+  if (msg.author.bot) return undefined;
+  if (!msg.content.startsWith(prefix)) return undefined;
+  const args = msg.content.split(' ');
+  const searchString = args.slice(1).join(' ');
+  const url = args[1] ? args[1] .replace(/<(.+)>/g, '$1') : '';
+  const serverQueue = queue.get(msg.guild.id);
+  let command = msg.content.toLowerCase().split(" ")[0];
+  command = command.slice(prefix.length)
+  if (command === `play`) {
+    const voiceChannel = msg.member.voiceChannel;
+    if (!voiceChannel) return msg.channel.send('يجب توآجد حضرتك بروم صوتي .');
+    const permissions = voiceChannel.permissionsFor(msg.client.user);
+    if (!permissions.has('CONNECT')) {
+      return msg.channel.send('لا يتوآجد لدي صلاحية للتكلم بهذآ الروم');
+    }
+    if (!permissions.has('SPEAK')) {
+      return msg.channel.send('لا يتوآجد لدي صلاحية للتكلم بهذآ الروم');
+    }
+
+    if (!permissions.has('EMBED_LINKS')) {
+      return msg.channel.sendMessage("**يجب توآفر برمشن `EMBED LINKS`لدي **rl")
+      }
+
+    if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
+      const playlist = await youtube.getPlaylist(url);
+      const videos = await playlist.getVideos();
+      for (const video of Object.values(videos)) {
+        const video2 = await youtube.getVideoByID(video.id);
+        await handleVideo(video2, msg, voiceChannel, true);
+      }
+      return msg.channel.send(` **${playlist.title}** تم الإضآفة إلى قأئمة التشغيل`);
+    } else {
+      try {
+
+        var video = await youtube.getVideo(url);
+
+      } catch (error) {
+        try {
+                          var fast = {};
+          var videos = await youtube.searchVideos(searchString, 10);
+          let index = 0;
+          const embed1 = new Discord.RichEmbed()
+              .setDescription(`**الرجآء من حضرتك إختيآر رقم المقطع** :
+${videos.map(video2 => `[**${++index}**] **${video2.title}**`).join('\n')}`)
+          .setFooter(`${msg.guild.name}`)
+            .setThumbnail('https://e.top4top.net/p_1001lsv3w1.png')
+
+          msg.channel.sendEmbed(embed1).then(message =>{
+
+            message.delete(15000)
+
+          });
+          try {
+            var response = await msg.channel.awaitMessages(msg2 => msg2.content > 0 && msg2.content < 11, {
+              maxMatches: 1,
+              time: 20000,
+              errors: ['time']
+            })
+
+            }catch(err) {
+            console.error(err);
+            return msg.channel.send('لم يتم إختيآر مقطع صوتي');
+            }
+          const videoIndex = parseInt(response.first().content);
+          var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
+        } catch (err) {
+          console.error(err);
+          return msg.channel.send(':x: لا يتوفر نتآئج بحث ');
+        }
+    }
+
+      return handleVideo(video, msg, voiceChannel);
+    }
+  } else if (command === `skip`) {
+    if (!msg.member.voiceChannel) return msg.channel.send('أنت لست بروم صوتي .');
+    if (!serverQueue) return msg.channel.send('لا يتوفر مقطع لتجآوزه');
+    serverQueue.connection.dispatcher.end('تم تجآوز هذآ المقطع');
+    return undefined;
+  } else if (command === `stop`) {
+    if (!msg.member.voiceChannel) return msg.channel.send('أنت لست بروم صوتي .');
+    if (!serverQueue) return msg.channel.send('لا يتوفر مقطع لإيقآفه');
+    serverQueue.songs = [];
+    serverQueue.connection.dispatcher.end('تم إيقآف هذآ المقطع');
+    return undefined;
+  } else if (command === `vol`) {
+    if (!msg.member.voiceChannel) return msg.channel.send('أنت لست بروم صوتي .');
+    if (!serverQueue) return msg.channel.send('لا يوجد شيء شغآل.');
+    if (!args[1]) return msg.channel.send(`:loud_sound: مستوى الصوت **${serverQueue.volume}**`);
+    serverQueue.volume = args[1];
+    serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 50);
+    return msg.channel.send(`:speaker: تم تغير الصوت الي **${args[1]}**`);
+  } else if (command === `np`) {
+    if (!serverQueue) return msg.channel.send('لا يوجد شيء حالي ف العمل.');
+    const embedNP = new Discord.RichEmbed()
+  .setDescription(`:notes: الان يتم تشغيل : **${serverQueue.songs[0].title}**`)
+    return msg.channel.sendEmbed(embedNP);
+  } else if (command === `replay`) {
+    if (!serverQueue) return msg.channel.send('لا يوجد شيء حالي ف العمل.');
+    const embedNP = new Discord.RichEmbed()
+  .setDescription(`سيتم اعاده تشغيل الفديو :**${serverQueue.songs[0].title}**`)
+  msg.channel.send({embed: embedNP})
+     return handleVideo(video, msg, msg.member.voiceChannel);
+
+  } else if (command === `queue`) {
+    if (!serverQueue) return msg.channel.send('لا يوجد شيء حالي ف العمل.');
+    let index = 0;
+    const embedqu = new Discord.RichEmbed()
+.setDescription(`**Songs Queue**
+${serverQueue.songs.map(song => `**${++index} -** ${song.title}`).join('\n')}
+**الان يتم تشغيل** ${serverQueue.songs[0].title}`)
+    return msg.channel.sendEmbed(embedqu);
+  } else if (command === `pause`) {
+    if (serverQueue && serverQueue.playing) {
+      serverQueue.playing = false;
+      serverQueue.connection.dispatcher.pause();
+      return msg.channel.send('تم إيقاف الموسيقى مؤقتا!');
+    }
+    return msg.channel.send('لا يوجد شيء حالي ف العمل.');
+  } else if (command === "resume") {
+    if (serverQueue && !serverQueue.playing) {
+      serverQueue.playing = true;
+      serverQueue.connection.dispatcher.resume();
+      return msg.channel.send('استأنفت الموسيقى بالنسبة لك !');
+    }
+    return msg.channel.send('لا يوجد شيء حالي في العمل.');
+  }
+
+  return undefined;
+async function handleVideo(video, msg, voiceChannel, playlist = false) {
+  const serverQueue = queue.get(msg.guild.id);
+  const song = {
+    id: video.id,
+    title: Util.escapeMarkdown(video.title),
+    url: `https://www.youtube.com/watch?v=${video.id}`,
+    time:`${video.duration.hours}:${video.duration.minutes}:${video.duration.seconds}`,
+    eyad:`${video.thumbnails.high.url}`,
+    best:`${video.channel.title}`,
+    bees:`${video.raw.snippet.publishedAt}`,
+    shahd:`${video.raw.kind}`,
+    zg:`${video.raw.snippet.channelId}`,
+        views:`${video.raw.views}`,
+        like:`${video.raw.likeCount}`,
+        dislike:`${video.raw.dislikeCount}`,
+        hi:`${video.raw.id}`
+  };
+  if (!serverQueue) {
+    const queueConstruct = {
+      textChannel: msg.channel,
+      voiceChannel: voiceChannel,
+      connection: null,
+      songs: [],
+      volume: 5,
+      playing: true
+    };
+    queue.set(msg.guild.id, queueConstruct);
+    queueConstruct.songs.push(song);
+    try {
+      var connection = await voiceChannel.join();
+      queueConstruct.connection = connection;
+      play(msg.guild, queueConstruct.songs[0]);
+    } catch (error) {
+      console.error(`I could not join the voice channel: ${error}`);
+      queue.delete(msg.guild.id);
+      return msg.channel.send(`لا أستطيع دخول هذآ الروم ${error}`);
+    }
+  } else {
+    serverQueue.songs.push(song);
+    console.log(serverQueue.songs);
+    if (playlist) return undefined;
+    else return msg.channel.send(` **${song.title}** تم اضافه الاغنية الي القائمة!`);
+  }
+  return undefined;
+}
+
+function play(guild, song) {
+  const serverQueue = queue.get(guild.id);
+
+  if (!song) {
+    serverQueue.voiceChannel.leave();
+    queue.delete(guild.id);
+    return;
+  }
+  console.log(serverQueue.songs);
+  const dispatcher = serverQueue.connection.playStream(ytdl(song.url))
+    .on('end', reason => {
+      if (reason === 'Stream is not generating quickly enough.') console.log('Song ended.');
+      else console.log(reason);
+      serverQueue.songs.shift();
+      play(guild, serverQueue.songs[0]);
+    })
+    .on('error', error => console.error(error));
+  dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
+    fetchVideoInfo(`${song.hi}`, function (err,  idk) {
+  if (err) throw new Error(err);
+  console.log( idk);
+      const yyyy = {}
+  if(!yyyy[msg.guild.id]) yyyy[msg.guild.id] = {
+    like: `${ idk.likeCount}`,
+    dislike: `${ idk.dislikeCount}`
+  }
+  serverQueue.textChannel.send({embed : new Discord.RichEmbed()
+  .setTitle(`**${ idk.title}**`)
+  .setURL( idk.url)
+  .addField('Time The Video :' , `${song.time}`, true)
+  .addField('Channel Name :' , `${song.best}`, true)
+  .addField('Channel ID :' , `${song.zg}`, true)
+  .addField('Video Created at :' , `${ idk.datePublished}`, true)
+  .addField('Views :' , `${ idk.views}`, true)
+  .addField('Like👍 :' , `${ idk.likeCount}`, true)
+  .addField('dislike👎 :' , `${ idk.dislikeCount}`, true)
+  .addField('comments :' , `${ idk.commentCount}`, true)
+  .setImage(`${song.eyad}`)
+  .setThumbnail('http://cdn.akhbaar24.com/430e061a-f89a-43c7-86d9-82fae5f7c495.jpg')
+  .setColor('#ff0000')
+  .setTimestamp()
+  }).then(love => {
+    love.react('👍').then(r=>{
+    love.react('👎').then(r =>{
+    love.react('🙌').then(r=> {
+    let likee = (reaction, user) => reaction.emoji.name === '👍' && user.id === msg.author.id;
+    let dislikee = (reaction, user) => reaction.emoji.name === '👎' && user.id === msg.author.id;
+    let cnn = (reaction, user) => reaction.emoji.name === '🙌' && user.id === msg.author.id;
+
+    let ll = love.createReactionCollector(likee , {max:5});
+    let dd = love.createReactionCollector(dislikee , {max:5});
+    let cn = love.createReactionCollector(cnn , {max:5});
+
+        ll.on("collect", r => {
+          yyyy[msg.guild.id].like++;
+  love.edit({embed : new Discord.RichEmbed()
+  .setTitle(`**${ idk.title}**`)
+  .setURL( idk.url)
+  .addField('Time The Video :' , `${song.time}`, true)
+  .addField('Channel Name :' , `${song.best}`, true)
+  .addField('Channel ID :' , `${song.zg}`, true)
+  .addField('Video Created at :' , `${ idk.datePublished}`, true)
+  .addField('Views :' , `${ idk.views}`, true)
+  .addField('Like👍 :' , `${yyyy[msg.guild.id].like}`, true)
+  .addField('dislike👎 :' , `${ idk.dislikeCount}`, true)
+  .addField('comments :' , `${ idk.commentCount}`, true)
+  .setImage(`${song.eyad}`)
+  .setThumbnail('http://cdn.akhbaar24.com/430e061a-f89a-43c7-86d9-82fae5f7c495.jpg')
+  .setColor('#ff0000')
+  .setTimestamp()
+});
+    })
+
+    dd.on("collect", r => {
+      yyyy[msg.guild.id].dislike++;
+  love.edit({embed : new Discord.RichEmbed()
+  .setTitle(`**${ idk.title}**`)
+  .setURL( idk.url)
+  .addField('Time The Video :' , `${song.time}`, true)
+  .addField('Channel Name :' , `${song.best}`, true)
+  .addField('Channel ID :' , `${song.zg}`, true)
+  .addField('Video Created at :' , `${ idk.datePublished}`, true)
+  .addField('Views :' , `${ idk.views}`, true)
+  .addField('Like👍 :' , `${ idk.likeCount}`, true)
+  .addField('dislike👎 :' , `${yyyy[msg.guild.id].dislike}`, true)
+  .addField('comments :' , `${ idk.commentCount}`, true)
+  .setImage(`${song.eyad}`)
+  .setThumbnail('http://cdn.akhbaar24.com/430e061a-f89a-43c7-86d9-82fae5f7c495.jpg')
+  .setColor('#ff0000')
+  .setTimestamp()
+});
+})
+    cn.on("collect", r => {
+  love.edit({embed : new Discord.RichEmbed()
+  .setTitle(`**${ idk.title}**`)
+  .setURL( idk.url)
+  .addField('Time The Video :' , `${song.time}`, true)
+  .addField('Channel Name :' , `${song.best}`, true)
+  .addField('Channel ID :' , `${song.zg}`, true)
+  .addField('Video Created at :' , `${ idk.datePublished}`, true)
+  .addField('Views :' , `${ idk.views}`, true)
+  .addField('Like👍 :' , `${ idk.likeCount}`, true)
+  .addField('dislike👎 :' , `${ idk.dislikeCount}`, true)
+  .addField('comments :' , `${ idk.commentCount}`, true)
+  .setImage(`${song.eyad}`)
+  .setThumbnail('http://cdn.akhbaar24.com/430e061a-f89a-43c7-86d9-82fae5f7c495.jpg')
+  .setColor('#ff0000')
+  .setTimestamp()
+});
+})
+})
+})
+})
+})
+})
+}
+});
 
 
 
+
+   
+   client.on('message', message => {
+    let args = message.content.split(' ').slice(1);
+    if(message.content.startsWith(prefix + '-role')) {
+        if(!message.member.hasPermission('MANAGE_ROLES')) return      message.channel.send('**للأسف لا تمتلك صلاحية** `MANAGE_ROLES`' );
+    let member = message.mentions.users.first();
+    let role = args.join(' ').replace(member, '').replace(args[0], '').replace(' ', '');
+    console.log(role);
+    if(member) {
+         if(role.startsWith('-')) {
+           let roleRe = args.join(' ').replace(member, '').replace(args[0], '').replace('-', '').replace(' ', '');
+           console.log(roleRe);
+           let role1 = message.guild.roles.find('name', roleRe);
+           console.log(`hi`);
+    const ee =new Discord.RichEmbed()
+    .setDescription('**:x: I can’t find the role.**')
+    .setFooter('Requested By '+message.author.username,message.author.avatarURL)
+    if(!role1) return message.channel.send(ee);                message.guild.member(member).removeRole(role1.id);
+    
+                const e = new Discord.RichEmbed()
+    
+            .setDescription(':white_check_mark:** Pull Role For **'+member+'**,** '+'**'+'-'+role1.name+'**')
+           .setFooter('Requested By '+message.author.username,message.author.avatarURL)
+           .setColor('BLACK')
+            message.channel.send(e)
+       } else if(!role.startsWith('-')) {
+           let roleRe = args.join(' ').replace(member, '').replace(args[0], '').replace('-', '').replace(' ', '');
+           let role1 = message.guild.roles.find('name', roleRe);
+    const ee =new Discord.RichEmbed()
+    .setDescription('**:x: I can’t find the role.**')
+    .setFooter('Requested By : '+message.author.username,message.author.avatarURL)
+    if(!role1) return message.channel.send(ee);                message.guild.member(member).removeRole(role1);
+           const e = new Discord.RichEmbed()
+    
+           .setDescription(':white_check_mark:** Pull Role For **'+member+'**,** '+'**'+'+'+role1.name+'**')
+           .setFooter('Requested By : '+message.author.username,message.author.avatarURL)
+           .setColor('BLACK')
+            message.channel.send(e)
+       } else {
+           message.reply(`يجب عليك كتابة اسم الرتبة`);
+       }
+    }
+    else if(args[0] == 'all') {
+    if(role.startsWith('B')) {
+    let roleRe = args.join(' ').replace(member, '').replace(args[0], '').replace('-', '').replace(' ', '');
+    let role1 = message.guild.roles.find('name', roleRe);
+              message.channel.send(`الرجاء الانتظار حتى يتم الانتهاء من الامر`).then(msg =>{
+      message.guild.members.forEach(m => {
+       message.guild.member(m).removeRole(role1.id);
+    });
+    msg.edit(`** :white_check_mark:   Done...\n**` +role1.name+`** Has Pull From __${message.guild.members.size}__ Member**`);
+    });
+    }
+    if(role) {
+    let role1 = message.guild.roles.find('name', role);
+    if(!role1) return;
+    message.channel.send(`الرجاء الانتظار حتى يتم الانتهاء من الامر`).then(msg => {
+    message.guild.members.forEach(m => {
+       message.guild.member(m).removeRole(role1);
+    });
+    msg.edit(`** :white_check_mark:   Done...\n**` +  role1.name+`** Has Pull To __${message.guild.members.size}__ Members **`);
+    });
+    }
+    } else if(args[0] == 'humans') {
+    if(role.startsWith('B')) {
+    let roleRe = args.join(' ').replace(member, '').replace(args[0], '').replace('-', '').replace(' ', '');
+    let role1 = message.guild.roles.find('name', roleRe);
+              message.channel.send(`الرجاء الانتظار حتى يتم الانتهاء من الامر`).then(msg =>{
+      message.guild.members.forEach(m => {
+       message.guild.member(m).removeRole(role1.id);
+    });
+    msg.edit(`** :white_check_mark:   Done...\n**` +role1.name+`** Has Pull From __${message.guild.members.size}__ Member**`);
+    });
+    }
+    
+    if(role) {
+    let role1 = message.guild.roles.find('name', role);
+    
+    const ee =new Discord.RichEmbed()
+    .setDescription('I Cann’t Find This Role')
+    .setFooter('Requested By : '+message.author.username,message.author.avatarURL)
+    if(!role1) return message.channel.send(ee);
+    message.channel.send(`الرجاء الانتظار حتى يتم الانتهاء من الامر`).then(msg => {
+       message.guild.members.filter(m =>m.user.bot == false).forEach(m => {
+           message.guild.member(m).removeRole(role1);
+       });
+    msg.edit(`** :white_check_mark:   Done...**`);
+    });
+    }
+    } else if(args[0] == 'bots') {
+    if(role.startsWith('B')) {
+    let roleRe = args.join(' ').replace(member, '').replace(args[0], '').replace('-', '').replace(' ', '');
+    let role1 = message.guild.roles.find('name', roleRe);
+              message.channel.send(`الرجاء الانتظار حتى يتم الانتهاء من الامر`).then(msg =>{
+      message.guild.members.forEach(m => {
+       message.guild.member(m).removeRole(role1.id);
+    });
+    msg.edit(`** :white_check_mark:  Done...**`);
+    });
+    }
+    if(role) {
+    let role1 = message.guild.roles.find('name', role);
+    const ee =new Discord.RichEmbed()
+    .setDescription('I Cann’t Find This Role')
+    .setFooter('Requested By : '+message.author.username,message.author.avatarURL)
+    if(!role1) return message.channel.send(ee);
+    message.channel.send(`الرجاء الانتظار حتى يتم الانتهاء من الامر`).then(msg => {
+       message.guild.members.filter(m =>m.user.bot == true).forEach(m => {
+           message.guild.member(m).removeRole(role1);
+       });
+    msg.edit(`** :white_check_mark:  Done...\n**` +role1.name+`** rank has been pull To __${message.guild.members.size}__ Member**`);
+    });
+    }
+    }
+    }
+    });
+
+
+
+
+
+client.on('message' , message => {
+if(message.content.startsWith(prefix+"user")) {
+    let user = message.mentions.users.first() || message.author;
+    const joineddiscord = (user.createdAt.getDate() + 1) + '-' + (user.createdAt.getMonth() + 1) + '-' + user.createdAt.getFullYear() + ' | ' + user.createdAt.getHours() + ':' + user.createdAt.getMinutes() + ':' + user.createdAt.getSeconds();
+    message.delete();
+    let game;
+    if (user.presence.game === null) {
+        game = 'لا يلعب حاليا.';
+    } else {
+        game = user.presence.game.name;
+    }
+    let messag;
+    if (user.lastMessage === null) {
+        messag = 'لم يرسل رسالة. ';
+    } else {
+        messag = user.lastMessage;
+    }
+    let status;
+    if (user.presence.status === 'online') {
+        status = ':green_heart:';
+    } else if (user.presence.status === 'dnd') {
+        status = ':heart:';
+    } else if (user.presence.status === 'idle') {
+        status = ':yellow_heart:';
+    } else if (user.presence.status === 'offline') {
+        status = ':black_heart:';
+    }
+    if (user.presence.status === 'offline') {
+        stat = 0x000000;
+    } else if (user.presence.status === 'online') {
+        stat = 0x00AA4C;
+    } else if (user.presence.status === 'dnd') {
+        stat = 0x9C0000;
+    } else if (user.presence.status === 'idle') {
+        stat = 0xF7C035;
+    }
+    const embed = new Discord.RichEmbed()
+  .addField('**UserInfo:**', `**name:** ${user.username}#${user.discriminator}\n**JoinedDiscord:** ${joineddiscord}\n**LastMessage:** ${messag}\n**Playing:** ${game}\n**Status:** ${status}\n**Bot?** ${user.bot}`, true)
+  .setThumbnail(user.displayAvatarURL)
+  .addField(`Roles:`, message.guild.members.get(user.id).roles.array(role => role.name).slice(1).join(', '))
+  .addField('DiscordInfo:', `**Discriminator:** #${user.discriminator}\n**ID:** ${user.id}\n**Username:** ${user.username}`)
+  .setAuthor(`معلومات ${user.username}`, user.displayAvatarURL)
+  .setColor(stat);
+    message.channel.send({embed})
+  .catch(e => logger.error(e));
+}
+ });
 
 client.login(process.env.BOT_TOKEN); 
