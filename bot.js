@@ -88,7 +88,7 @@ client.on("message", message => {
 - AdminOrder
 &bc | برودكسات للجميع
 &obc | برودكسات للاونلاين فقط
-&setlog | قريبا
+&setlog | نشاء روم اللوق
 &clear | لمسح الشات
 &autorole | لتمكين رتبه تلقائيه
 &ban | لتبنيد شخص من سيرفر
