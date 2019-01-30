@@ -3052,7 +3052,7 @@ client.on('message', async message => {
 	
 client.on("message", (message) => {
 
-  if(message.content.startsWith(`${prefix}new`)){
+if (message.content.toLowerCase().startsWith(prefix + `new`)) {
      const reason = message.content.split(" ").slice(1).join(" ");
      if (!message.guild.roles.exists("name", "Support Team")) return message.channel.send(`وتعطيها للي تريده يشوف التكت \`Support Team\`لازم تساوي رتبه اسمها`);
      if (message.guild.channels.exists("name", "ticket-" + message.author.id)) return message.channel.send(`لديك بالفعل تذكرة مفتوحة.`);
@@ -3083,12 +3083,12 @@ client.on("message", (message) => {
  }
 
 
-  if(message.content.startsWith(`${prefix}close`)){
+if (message.content.toLowerCase().startsWith(prefix + `close`)) {
      if (!message.channel.name.startsWith(`ticket-`)) return message.channel.send(`لا يمكنك استخدام أمر الإغلاق خارج قناة التذكرة.`);
 
-     message.channel.send(`لايمكنك عكس هذا الاجراء سوف تنتهي المهلة في غضون 10 ثوانٍ ويتم إلغاؤها. `/close\` : هل أنت واثق؟ بعد التأكيد ، لا يمكنك عكس هذا الإجراء! للاغلاق اكتب`)
+     message.channel.send(`لايمكنك عكس هذا الاجراء سوف تنتهي المهلة في غضون 10 ثوانٍ ويتم إلغاؤها. \`&close\` : هل أنت واثق؟ بعد التأكيد ، لا يمكنك عكس هذا الإجراء! للاغلاق اكتب`)
          .then((m) => {
-             message.channel.awaitMessages(response => response.content === '&close', {
+      message.channel.awaitMessages(response => response.content === '&close', {
                      max: 1,
                      time: 10000,
                      errors: ['time'],
