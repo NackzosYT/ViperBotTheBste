@@ -192,7 +192,7 @@ client.on("message", message => {
 &sch | لاضهاء روم
 &dr | لحذف جميع رتب السيرفر
 &dc | لحذف جميع رتب السيرفر
-&setwelcomer | لتمكين الترحيب بالصوره قريبا
+&setwelcomer | لتمكين الترحيب بالصور المتعدده
 &vonline | يساوي روم فويس اونلاين
 &ccolors | صناعه الوان بالعدد الي تريده
 &move | لسحب شخص لروم مالك
@@ -2975,14 +2975,14 @@ client.on('message', async message => {
      category : 'click here',
       channel : 'click here'
        }
-        if(message.content.startsWith('Btemp on')){
+        if(message.content.startsWith('&temp on')){
          if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
           var ggg= message.guild.createChannel('click here', 'category').then(cg => {
            var ccc =message.guild.createChannel('click here', 'voice').then(ch => {
             ch.setParent(cg)
              message.channel.send('**Done ,**')
               client.on('message' , message => {
-               if(message.content === 'Btemp off') {
+               if(message.content === '&temp off') {
                 if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
                  cg.delete()
                   ch.delete()
@@ -3054,8 +3054,8 @@ client.on("message", (message) => {
 
   if(message.content.startsWith(`${prefix}new`)){
      const reason = message.content.split(" ").slice(1).join(" ");
-     if (!message.guild.roles.exists("name", "Support Team")) return message.channel.send(`This server doesn't have a \`Support Team\` role made, so the ticket won't be opened.\nIf you are an administrator, make one with that name exactly and give it to users that should be able to see tickets.`);
-     if (message.guild.channels.exists("name", "ticket-" + message.author.id)) return message.channel.send(`You already have a ticket open.`);
+     if (!message.guild.roles.exists("name", "Support Team")) return message.channel.send(`وتعطيها للي تريده يشوف التكت \`Support Team\`لازم تساوي رتبه اسمها`);
+     if (message.guild.channels.exists("name", "ticket-" + message.author.id)) return message.channel.send(`لديك بالفعل تذكرة مفتوحة.`);
      message.guild.createChannel(`ticket-${message.author.id}`, "text").then(c => {
          let role = message.guild.roles.find("name", "Support Team");
          let role2 = message.guild.roles.find("name", "@everyone");
@@ -3071,10 +3071,10 @@ client.on("message", (message) => {
              SEND_MESSAGES: true,
              READ_MESSAGES: true
          });
-         message.channel.send(`:white_check_mark: Your ticket has been created, #${c.name}.`);
+         message.channel.send(`:white_check_mark: تم إنشاء تذكرتك, #${c.name}.`);
          const embed = new Discord.RichEmbed()
              .setColor(0xCF40FA)
-             .addField(`Hey ${message.author.username}!`, `Please try explain why you opened this ticket with as much detail as possible. Our **Support Staff** will be here soon to help.`)
+             .addField(`مهلا ${message.author.username}!`, `يرجى محاولة شرح سبب فتح هذه التذكرة بأكبر قدر ممكن من التفاصيل. سيكون لدينا ** فريق الدعم ** قريباً لمساعدتك.`)
              .setTimestamp();
          c.send({
              embed: embed
@@ -3084,9 +3084,9 @@ client.on("message", (message) => {
 
 
   if(message.content.startsWith(`${prefix}close`)){
-     if (!message.channel.name.startsWith(`ticket-`)) return message.channel.send(`You can't use the close command outside of a ticket channel.`);
+     if (!message.channel.name.startsWith(`ticket-`)) return message.channel.send(`لا يمكنك استخدام أمر الإغلاق خارج قناة التذكرة.`);
 
-     message.channel.send(`Are you sure? Once confirmed, you cannot reverse this action!\nTo close, type \`/close\`. This will time out in 10 seconds and be cancelled.`)
+     message.channel.send(`لايمكنك عكس هذا الاجراء سوف تنتهي المهلة في غضون 10 ثوانٍ ويتم إلغاؤها. `&close` : هل أنت واثق؟ بعد التأكيد ، لا يمكنك عكس هذا الإجراء! للاغلاق اكتب`)
          .then((m) => {
              message.channel.awaitMessages(response => response.content === '&close', {
                      max: 1,
@@ -3097,7 +3097,7 @@ client.on("message", (message) => {
                      message.channel.delete();
                  })
                  .catch(() => {
-                     m.edit('Ticket close timed out, the ticket was not closed.').then(m2 => {
+                     m.edit('انتهى إغلاق التذاكر ، لم يتم إغلاق التذكرة.').then(m2 => {
                          m2.delete();
                      }, 3000);
                  });
