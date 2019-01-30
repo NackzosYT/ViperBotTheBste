@@ -599,16 +599,45 @@ client.on('message', async message => {
 });
 
 
-client.on('message', message => {//Toxic Codes
-if(message.content.startsWith(prefix + 'unmute')){//Toxic Codes
-    let role = message.guild.roles.find(r => r.name === 'Muted');//Toxic Codes
-if(!user.roles.has(role)) {
-    return message.channel.send(`He is not muted`);//Toxic Codes
+
+client.on('message', async message =>{
+if (message.author.omar) return;
+if (!message.content.startsWith(prefix)) return;
+if(!message.channel.guild) return message.channel.send('**This Command For Servers Only ! **').then(m => m.delete(5000));
+if(!message.member.hasPermission('MANAGE_ROLES'));
+if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.reply("**I Don't Have `MANAGE_ROLES` Permission**").then(msg => msg.delete(6000))
+var command = message.content.split(" ")[0];
+command = command.slice(prefix.length);
+var args = message.content.split(" ").slice(1);
+if(command === `unmute`) {
+if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel.sendMessage("**You Dont Have MANAGE_ROLES Permssions**:x: ").then(msg => msg.delete(6000))
+
+
+let toMute = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
+if(!toMute) return message.channel.sendMessage("**Mention Someone Please**:x: ");
+
+let role = message.guild.roles.find (r => r.name === "Muted");
+
+if(!role || !toMute.roles.has(role.id)) return message.channel.sendMessage("**This Person Is Not Muted ! **:x:")
+
+await toMute.removeRole(role)
+
+message.channel.sendMessage(`**${toMute} Has been unmuted !**:white_check_mark:`);
+message.delete();
+let mutedEmbed = new Discord.RichEmbed()
+.setDescription("» New UnMute User «")
+.setColor("#bc0000")
+.addField("Unmuted", `${Warned} with ID ${Warned.id}`)
+.addField("Unmuted By", `<@${message.member.id}> with ID ${message.member.id}`)
+.addField("Unmuted In", message.channel)
+.addField("Time & Date", `${message.createdAt}`)
+.setFooter("MarsMC")
+let incidentchannel = message.guild.channels.find(`name`, "incidents");
+if(!incidentchannel) return message.channel.send("Can't find incidents channel.");
+return;
+
 }
-    user.removeRole(role).then(message.channel.send(`Unmuted ${user}`));
-    
-}
-}); //Toxic Codes
+}); 
 //////كود اعطاء ميوت وفكه/////
 
 
