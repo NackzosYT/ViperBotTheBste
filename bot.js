@@ -3088,7 +3088,7 @@ client.on("message", (message) => {
 
      message.channel.send(`لايمكنك عكس هذا الاجراء سوف تنتهي المهلة في غضون 10 ثوانٍ ويتم إلغاؤها. `&close` : هل أنت واثق؟ بعد التأكيد ، لا يمكنك عكس هذا الإجراء! للاغلاق اكتب`)
          .then((m) => {
-             message.channel.awaitMessages(response => response.content === '&close', {
+             message.channel.awaitMessages(response => response.content === 'close', {
                      max: 1,
                      time: 10000,
                      errors: ['time'],
