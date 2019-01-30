@@ -3086,9 +3086,9 @@ client.on("message", (message) => {
   if(message.content.startsWith(`${prefix}close`)){
      if (!message.channel.name.startsWith(`ticket-`)) return message.channel.send(`لا يمكنك استخدام أمر الإغلاق خارج قناة التذكرة.`);
 
-     message.channel.send(`لايمكنك عكس هذا الاجراء سوف تنتهي المهلة في غضون 10 ثوانٍ ويتم إلغاؤها. `/close` : هل أنت واثق؟ بعد التأكيد ، لا يمكنك عكس هذا الإجراء! للاغلاق اكتب`)
+     message.channel.send(`لايمكنك عكس هذا الاجراء سوف تنتهي المهلة في غضون 10 ثوانٍ ويتم إلغاؤها. `/close\` : هل أنت واثق؟ بعد التأكيد ، لا يمكنك عكس هذا الإجراء! للاغلاق اكتب`)
          .then((m) => {
-             message.channel.awaitMessages(response => response.content === 'close', {
+             message.channel.awaitMessages(response => response.content === '&close', {
                      max: 1,
                      time: 10000,
                      errors: ['time'],
