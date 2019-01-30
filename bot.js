@@ -755,29 +755,46 @@ if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('لي�
 
 
 ///////كود كيك///////
-client.on('message', message => {
-  if (message.author.bot) return;
-  if (!message.content.startsWith(prefix)) return;
-  var command = message.content.split(" ")[0];
-  command = command.slice(prefix.length);
-  var args = message.content.split(" ").slice(1);
-  if (command == "kick") {
-   if(!message.channel.guild) return message.reply('** This command only for servers ❌**');
-   const guild = message.guild;
-  if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.reply("**You Don't Have ` KICK_MEMBERS ` Permission**");
-  if(!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.reply("**I Don't Have ` KICK_MEMBERS ` Permission**");
-  var user = message.mentions.users.first();
-  var reason = message.content.split(" ").slice(2).join(" ");
-  if (message.mentions.users.size < 1) return message.reply("**__Mention__ A Member To Kick !**");
-  if (!message.guild.member(user).kickable) return message.reply("**Can't Kick A Higher Role Than Me !**");
-  message.channel.send(`**:white_check_mark: ${user.tag} Kicked Form The Server By : <@${message.author.id}> ! :airplane:** `)
-  guild.owner.send(`سيرفر : ${guild.name}
-**تم طرد** :${user.tag}  
-**بواسطة** : <@${message.author.id}>`).then(()=>{
-message.guild.member(user).kick();
-  })
-}
-});
+    client.on('message', message => {
+          if (message.author.kick) return;
+          if (!message.content.startsWith(prefix)) return;
+        
+          let command = message.content.split(" ")[0];
+          command = command.slice(prefix.length);
+        
+          let args = message.content.split(" ").slice(1);
+        
+          if (command == "kick") {
+                       if(!message.channel.guild) return;
+        
+          if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.reply("You Don't Have KICK_MEMBERS Permission").then(msg => msg.delete(5000));
+          if(!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.reply("I Don't Have KICK_Members Permission");
+          let user = message.mentions.users.first();
+          let reason = message.content.split(" ").slice(2).join(" ");
+        
+          if (message.mentions.users.size < 1) return message.reply("منشن شخص");
+          if(!reason) return message.reply ("اكتب سبب الطرد");
+          if (!message.guild.member(user)
+          .bannable) return message.reply("لايمكنني طرد شخص اعلى من رتبتي");
+        
+          message.guild.member(user).kick(7, user);
+        
+          const Kickembed = new Discord.RichEmbed()
+          .setTitle('**New Kicked User !**')
+          .setColor("RANDOM")
+          .setTimestamp()
+          .addField("Kicked User:",  `[ + ${user.tag} + ]`)
+          .addField("Kicked By:", `[  + ${message.author.tag} +  ]`)
+          .addField("Reason:", `[ + ${reason} +  ]`)
+          .addField("Kicked In :", `[${message.channel.name}]`)
+          .addField("Time & Date :", `[${message.createdAt}]`)
+          .setFooter(message.author.tag,message.author.avatarURL);
+          message.guild.channels.find('name',  'incidents').sendEmbed(Kickembed)
+        message.channel.send(`**:white_check_mark: ${user} has been kicked ! :airplane:**`)
+        user.send(`**:airplane: You are has been kicked in ${message.guild.name} reason: ${reason}**`)
+            message.delete()
+        }
+        });
 ///////كود كيك///////
 
 
