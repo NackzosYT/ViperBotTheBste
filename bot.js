@@ -177,7 +177,8 @@ client.on("message", message => {
 &obc | برودكسات للاونلاين فقط
 &setlog | نشاء روم اللوق
 &clear | لمسح الشات
-&autorole | لروئيه طريقه انشاء رتبه تلقائيه
+&autorole | لانشاء رتبه تلقائيه
+&autoroleinfo | لروئيه معلومات الرتبه التلقائيه
 &ban | لتبنيد شخص من سيرفر
 &kick | لطرد شخص من سيرفر
 &role | لاعطاء رتبه لعضو
@@ -410,7 +411,7 @@ client.on('message', message => {
  });
 ////كود ايدي بصوره/////
 //////اوتو رول/////
-let ar = JSON.parse(fs.readFileSync(`AutoRole.json`, `utf8`))
+let ar = JSON.parse(fs.readFileSync(`./Data/AutoRole.json`, `utf8`))
 client.on('guildMemberAdd', member => {
 if(!ar[member.guild.id]) ar[member.guild.id] = {
 onoff: 'Off',
@@ -444,7 +445,7 @@ ar[message.guild.id].role = newRole
 message.channel.send(`**The AutoRole Has Been Changed to ${newRole}.**`)
 }
   }
-if(message.content === prefix + 'autorole') {
+if(message.content === prefix + 'autoroleinfo') {
 let perms = message.member.hasPermission(`MANAGE_GUILD`)
 if(!perms) return message.reply(`You don't have permissions.`)
 var embed = new Discord.RichEmbed()
