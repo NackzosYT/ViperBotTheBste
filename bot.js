@@ -45,7 +45,6 @@ client.user.setGame(`&help | ViperBot`,'https://www.twitch.tv/nackzos');
 
 
 
-const pretty = require('pretty-ms'); // npm i pretty-ms
 const credits = require('./Credits.json');
 const creditsPath = './Credits.json';
 client.on('message',async message => {
