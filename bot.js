@@ -43,10 +43,6 @@ client.user.setGame(`&help | ViperBot`,'https://www.twitch.tv/nackzos');
 
 ////////////كود كريدتس//////////
 
-\\سو ملف أسمه
-\\Credits.json
-\\وحط فيه 
-\\{}
 
 
 const pretty = require('pretty-ms'); // npm i pretty-ms
