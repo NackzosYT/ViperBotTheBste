@@ -32,6 +32,98 @@ client.user.setGame(`&help | ViperBot`,'https://www.twitch.tv/nackzos');
 
 
 
+
+
+
+
+
+
+
+
+
+////////////كود كريدتس//////////
+
+\\سو ملف أسمه
+\\Credits.json
+\\وحط فيه 
+\\{}
+
+
+const pretty = require('pretty-ms'); // npm i pretty-ms
+const credits = require('./Credits.json');
+const creditsPath = './Credits.json';
+client.on('message',async message => {
+    if(message.author.bot || message.channel.type === 'dm') return;
+    let args = message.content.split(' ');
+    let author = message.author.id;
+    if(!credits[author]) credits[author] = { messages: 0, credits: 0, xp: 0, daily: 86400000 };
+    credits[author].messages += 1;
+    credits[author].xp += 1;
+    if(credits[author].xp === 5) {
+        credits[author].xp = 0;
+        credits[author].credits += 1;
+        fs.writeFileSync(creditsPath, JSON.stringify(credits, null, 4));
+    }
+    fs.writeFileSync(creditsPath, JSON.stringify(credits, null, 4));
+ 
+   
+   if(args[0].toLowerCase() == `${prefix}credit` || args[0].toLowerCase() === `${prefix}credits`) {
+       let mention = message.mentions.users.first() || message.author;
+       let mentionn = message.mentions.users.first();
+       if(!credits[mention.id]) return message.channel.send(`**❎ |** Failed To Find the **Needed Data**.`);
+       if(!args[2]) {
+        let creditsEmbed = new Discord.RichEmbed()
+       .setColor("#36393e")
+       .setAuthor(mention.username, mention.avatarURL)
+       .setThumbnail(mention.avatarURL)
+       .addField(`❯ الكردت`, `» \`${credits[mention.id].credits} $\`\n`, true)
+       .addField(`❯ الرسائل`, `» \`${credits[mention.id].messages} 💬\``, true);
+       message.channel.send(creditsEmbed);
+       
+       } else if(mentionn && args[2]) {
+           if(isNaN(args[2])) return message.channel.send(`**❎ |** The **"Number"** You Entered **Isn't Correct**.`);
+          if(mentionn.id === message.author.id) return message.channel.send(`**❎ |** You Can't Give **Credits** To **Yourself**.`);
+           if(args[2] > credits[author].credits) return message.channel.send(`**❎ |** You don't have **Enough** credits to give to ${mentionn}`);
+          let first = Math.floor(Math.random() * 9);
+          let second = Math.floor(Math.random() * 9);
+          let third = Math.floor(Math.random() * 9);
+          let fourth = Math.floor(Math.random() * 9);
+          let num = `${first}${second}${third}${fourth}`;
+         
+          message.channel.send(`**🛡 |** **Type** \`${num}\` To **Complete** the transfer!`).then(m => {
+              message.channel.awaitMessages(r => r.author.id === message.author.id, { max: 1, time: 20000, errors:['time'] }).then(collected => {
+                  let c = collected.first();
+                  if(c.content === num) {
+                          message.channel.send(`**✅ |** Successfully **Transfered** \`$${args[2]}\` !`);
+                          m.delete();
+                          c.delete();
+                          credits[author].credits += (-args[2]);
+                          credits[mentionn.id].credits += (+args[2]);
+                          fs.writeFileSync(creditsPath, JSON.stringify(credits, null, 4));
+                  } else {
+                          m.delete();
+                  }
+              });
+          });
+         
+      } else {
+          message.channel.send(`**❎ |** The **Syntax** should be like **\`${prefix}credits <Mention> [Ammount]\`**`);
+      }
+  } else if(args[0].toLowerCase() === `${prefix}daily`) {
+      if(credits[author].daily !== 86400000 && Date.now() - credits[author].daily !== 86400000) {
+          message.channel.send(`**❎ |** You already **Claimed** the daily ammount of credits since \`${pretty(Date.now() - credits[author].daily)}\`.`);
+      } else {
+          let ammount = getRandom(300, 500);
+          credits[author].daily = Date.now();
+          credits[author].credits += ammount;
+          fs.writeFileSync(creditsPath, JSON.stringify(credits, null, 4));
+          message.channel.send(`**✅ |** \`${ammount}\`, Successfully **Claimed** Your daily ammount of credits!`);
+      }
+  }
+});
+/////////كود كريدتس//////////
+
+
 /////برودكسات...//////
 client.on("message", message => {
  
@@ -155,6 +247,12 @@ client.on("message", message => {
 - حمايه فائقه من التهكير والجحفله:no_mobile_phones: 
 - استجابه سريعه وشغال 24 ساعه:arrows_counterclockwise: 
 - اوامر مطوره وسهله الاستخدام:black_nib: 
+- اوامر كريدتس او رصيد
+
+
+- CreditsOrder
+&credit | لمشاهده الكريدت الخاص بك او لتحويل كريدتس 
+&daily | لكسب كريدتس يومي
 
 
 - PublicOrder
@@ -177,6 +275,8 @@ client.on("message", message => {
 &obc | برودكسات للاونلاين فقط
 &setlog | نشاء روم اللوق
 &clear | لمسح الشات
+&antijoin <Days> | لتحديد عدد الايام المسموح بها دخول السيرفر
+antijoin <on/off> | تفعيل او الغاء عدد ايام حسابات الي تدخل سيرفر
 &autorole | لانشاء رتبه تلقائيه
 &autoroleinfo | لروئيه معلومات الرتبه التلقائيه
 &ban | لتبنيد شخص من سيرفر
@@ -410,6 +510,94 @@ client.on('message', message => {
  }
  });
 ////كود ايدي بصوره/////
+
+
+
+/////مانع الحسابات الوهميه.//////
+let antijoin = JSON.parse(fs.readFileSync('./antijoin.json' , 'utf8'));
+/*يحتاج تعرف بكج const fs = require('fs')
+طبعا لو مو معرف البكج ^
++ تثبت البكج npm i fs
+*/
+client.on('message', message => {
+    if(message.content.startsWith(prefix + "antijoin on")) {
+        if(!message.channel.guild) return message.reply('**This Command Only For Servers**');
+        if(!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send('**Sorry But You Dont Have Permission** `MANAGE_GUILD`' );
+antijoin[message.guild.id] = {
+onoff: 'On',
+}
+message.channel.send(`**✅ The AntiJoin Is __𝐎𝐍__ !**`)
+          fs.writeFile("./antijoin.json", JSON.stringify(antijoin), (err) => {
+            if (err) return console.error(err)
+            .catch(err => {
+              console.error(err);
+          });
+            });
+          }
+
+        })
+
+
+client.on('message', message => {
+    if(message.content.startsWith(prefix + "antijoin off")) {
+        if(!message.channel.guild) return message.reply('**This Command Only For Servers**');
+        if(!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send('**Sorry But You Dont Have Permission** `MANAGE_GUILD`' );
+antijoin[message.guild.id] = {
+onoff: 'Off',
+}
+message.channel.send(`**⛔ The AntiJoin Is __𝐎𝐅𝐅__ !**`)
+          fs.writeFile("./antijoin.json", JSON.stringify(antijoin), (err) => {
+            if (err) return console.error(err)
+            .catch(err => {
+              console.error(err);
+          });
+            });
+          }
+
+        })
+         client.on('message', message => {
+          if (!message.channel.guild) return;
+
+
+   if(message.content.startsWith(prefix + "setJoin")) {
+          let time = message.content.split(" ").slice(1).join(" ");
+       if(!message.channel.guild) return message.reply('**This Command Only For Servers**');
+       if(!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send('**Sorry But You Dont Have Permission** `MANAGE_GUILD`' );
+if (!time) return message.channel.send('Please Type The Account Created Time [Days]');
+let embed = new Discord.RichEmbed()
+.setTitle('**Done The AntiJoin Code Has Been Setup**')
+.addField('Account Create Time:', `${time}.`)
+.addField('Requested By:', `${message.author}`)
+.setThumbnail(message.author.avatarURL)
+.setFooter(`${client.user.username}`)
+message.channel.sendEmbed(embed)
+antijoin[message.guild.id] = {
+created: time,
+onoff: 'On',
+}
+fs.writeFile("./antijoin.json", JSON.stringify(antijoin), (err) => {
+if (err) console.error(err)
+})
+   }})
+
+client.on("guildMemberAdd", async member => {
+  if(!antijoin[member.guild.id]) antijoin[member.guild.id] = {
+    onoff: 'Off'
+  }
+  if(antijoin[member.guild.id].onoff === 'Off') return;
+  if(!member.user.bot) return;
+    let accounttime = `${antijoin[member.guild.id].created}`
+    let moment2 = require('moment-duration-format'),
+        moment = require("moment"),
+        date = moment.duration(new Date() - member.user.createdAt).format("d");
+  
+    if(date < accounttime) {
+      member.ban(`Member account age is lower than ${antijoin[member.guild.id].created} days.`)
+    }
+  });
+/////مانع الحسابات الوهميه.//////
+
+
 //////اوتو رول/////
 let ar = JSON.parse(fs.readFileSync(`./Data/AutoRole.json`, `utf8`))
 client.on('guildMemberAdd', member => {
@@ -1745,40 +1933,6 @@ client.on('guildCreate', guild => {
 
 
 
-const devs = ['538100620238782464'];
-
-client.on('message', message => {//Toxic Codes
-    let argresult = message.content.split(` `).slice(1).join(' ');//Toxic Codes
-    if (message.content.startsWith(prefix + 'setStreaming')) {//Toxic Codes
-      if (!devs.includes(message.author.id)) return message.channel.send("<@ايدي الاونر > only this guy can do restart the bot so don't try again :wink:.");
-      message.delete();
-      client.user.setGame(argresult, 'https://twitch.tv/nackzos');
-
-    } else if(message.content.startsWith(prefix + 'setWatching')) {
-        client.user.setActivity(argresult,{type: 'WATCHING'});
-
-      } else if(message.content.startsWith(prefix + 'setListening')) {//Toxic Codes
-        client.user.setActivity(argresult,{type: 'LISTENING'});
-//Toxic Codes
-      } else if(message.content.startsWith(prefix + 'setPlaying')) {//Toxic Codes
-        client.user.setActivity(argresult,{type: 'PLAYING'});
-
-      } else if(message.content.startsWith(prefix + 'setName')) {
-        client.user.setUsername(argresult);
-
-      } else if(message.content.startsWith(prefix + 'setAvatar')) {
-        client.user.setAvatar(argresult);
-
-
-      } else if(message.content.startsWith(prefix + 'setStatus')) {
-        if(!argresult) return message.channel.send('`online`, `DND(Do not Distrub),` `idle`, `invisible(Offline)` 🎶 أختر أحد الحالات');
-        client.user.setStatus(argresult);
-
-
-    }//Toxic Codes
-
-  }); //Toxic Codes
-  
   
   client.on('message' , message => {
   if(message.author.bot) return;
